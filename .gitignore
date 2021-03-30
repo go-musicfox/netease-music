@@ -1,4 +1,5 @@
 .vscode/
 .env
+.DS_Store
 go.sum
 .idea/
