@@ -1,4 +1,4 @@
-# NeteaseCloudMusicApiWithGo
+# netease-music
 
 **fork自 [sirodeneko/NeteaseCloudMusicApiWithGo](https://github.com/sirodeneko/NeteaseCloudMusicApiWithGo)**
 
@@ -20,7 +20,7 @@
 ## 运行
 
 ```shell
-go get -u github.com/anhoder/netease-musi
+go get -u github.com/anhoder/netease-music
 ```
 
 ```go
