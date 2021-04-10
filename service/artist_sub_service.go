@@ -9,7 +9,7 @@ type ArtistSubService struct {
 	Id string `json:"id" form:"id"`
 }
 
-func (service *ArtistSubService) ArtistSub() map[string]interface{} {
+func (service *ArtistSubService) ArtistSub() (float64, string) {
 
 	options := &util.Options{
 		Crypto:  "weapi",
@@ -25,7 +25,7 @@ func (service *ArtistSubService) ArtistSub() map[string]interface{} {
 	data["artistId"] = service.Id
 	data["artistIds"] = "[" + service.Id + "]"
 
-	reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/artist/`+service.T, data, options)
+	code, reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/artist/`+service.T, data, options)
 
-	return reBody
+	return code, reBody
 }

@@ -9,7 +9,7 @@ type ArtistSublistService struct {
 	Offset string `json:"offset" form:"offset"`
 }
 
-func (service *ArtistSublistService) ArtistSublist() map[string]interface{} {
+func (service *ArtistSublistService) ArtistSublist() (float64, string) {
 
 	options := &util.Options{
 		Crypto:  "weapi",
@@ -26,7 +26,7 @@ func (service *ArtistSublistService) ArtistSublist() map[string]interface{} {
 	data["offset"] = service.Offset
 	data["total"] = "true"
 
-	reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/artist/sublist`, data, options)
+	code, reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/artist/sublist`, data, options)
 
-	return reBody
+	return code, reBody
 }

@@ -31,7 +31,7 @@ type ArtistListService struct {
 	Initial string `json:"initial" form:"initial"`
 }
 
-func (service *ArtistListService) ArtistList() map[string]interface{} {
+func (service *ArtistListService) ArtistList() (float64, string) {
 
 	options := &util.Options{
 		Crypto:  "weapi",
@@ -60,7 +60,7 @@ func (service *ArtistListService) ArtistList() map[string]interface{} {
 		data["initial"] = fmt.Sprintf("%v", strings.ToUpper(service.Initial)[0])
 	}
 
-	reBody, _ := util.CreateRequest("POST", `https://music.163.com/api/v1/artist/list`, data, options)
+	code, reBody, _ := util.CreateRequest("POST", `https://music.163.com/api/v1/artist/list`, data, options)
 
-	return reBody
+	return code, reBody
 }

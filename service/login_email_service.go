@@ -3,8 +3,8 @@ package service
 import (
 	"crypto/md5"
 	"encoding/hex"
-	"net/http"
 	"github.com/anhoder/netease-music/util"
+	"net/http"
 )
 
 type LoginEmailService struct {
@@ -13,7 +13,7 @@ type LoginEmailService struct {
 	Md5password string `json:"md5_password" form:"md5_password"`
 }
 
-func (service *LoginEmailService) LoginEmail() map[string]interface{} {
+func (service *LoginEmailService) LoginEmail() (float64, string) {
 
 	cookiesOS := &http.Cookie{Name: "os", Value: "pc"}
 
@@ -35,8 +35,8 @@ func (service *LoginEmailService) LoginEmail() map[string]interface{} {
 	data["rememberLogin"] = "true"
 
 	//reBody, cookies := util.CreateRequest("POST", `https://www.httpbin.org/post`, data, options)
-	reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/login`, data, options)
+	code, reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/login`, data, options)
 
 
-	return reBody
+	return code, reBody
 }

@@ -1,15 +1,15 @@
 package service
 
 import (
-	"net/http"
 	"github.com/anhoder/netease-music/util"
+	"net/http"
 )
 
 type LyricService struct {
 	ID string `json:"id" form:"id"`
 }
 
-func (service *LyricService) Lyric() map[string]interface{} {
+func (service *LyricService) Lyric() (float64, string) {
 
 	cookiesOS := &http.Cookie{Name: "os", Value: "pc"}
 
@@ -23,7 +23,7 @@ func (service *LyricService) Lyric() map[string]interface{} {
 	data["kv"] = "-1"
 	data["tv"] = "-1"
 
-	reBody, _ := util.CreateRequest("POST", `https://music.163.com/api/song/lyric`, data, options)
+	code, reBody, _ := util.CreateRequest("POST", `https://music.163.com/api/song/lyric`, data, options)
 
-	return reBody
+	return code, reBody
 }

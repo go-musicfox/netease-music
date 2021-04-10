@@ -10,7 +10,7 @@ type UserFollowsService struct {
 	Offset string `json:"offset" form:"offset"`
 }
 
-func (service *UserFollowsService) UserFollows() map[string]interface{} {
+func (service *UserFollowsService) UserFollows() (float64, string) {
 
 	options := &util.Options{
 		Crypto:  "weapi",
@@ -28,7 +28,7 @@ func (service *UserFollowsService) UserFollows() map[string]interface{} {
 		data["offset"] = service.Offset
 	}
 	data["order"] = "true"
-	reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/user/getfollows/`+service.Uid, data, options)
+	code, reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/user/getfollows/`+service.Uid, data, options)
 
-	return reBody
+	return code, reBody
 }

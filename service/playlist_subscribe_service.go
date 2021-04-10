@@ -9,7 +9,7 @@ type PlaylistSubscribeService struct {
 	ID string `json:"id" form:"id"`
 }
 
-func (service *PlaylistSubscribeService) PlaylistSubscribe() map[string]interface{} {
+func (service *PlaylistSubscribeService) PlaylistSubscribe() (float64, string) {
 
 	options := &util.Options{
 		Crypto:  "weapi",
@@ -22,7 +22,7 @@ func (service *PlaylistSubscribeService) PlaylistSubscribe() map[string]interfac
 		service.T = "unsubscribe"
 	}
 
-	reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/playlist/`+service.T, data, options)
+	code, reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/playlist/`+service.T, data, options)
 
-	return reBody
+	return code, reBody
 }

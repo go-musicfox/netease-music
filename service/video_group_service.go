@@ -9,7 +9,7 @@ type VideoGroupService struct {
 	Offset  string `json:"offset" form:"offset"`
 }
 
-func (service *VideoGroupService) VideoGroup() map[string]interface{} {
+func (service *VideoGroupService) VideoGroup() (float64, string) {
 
 	options := &util.Options{
 		Crypto:  "weapi",
@@ -23,7 +23,7 @@ func (service *VideoGroupService) VideoGroup() map[string]interface{} {
 	}
 	data["order"] = "true"
 	data["need_preview_url"] = "true"
-	reBody, _ := util.CreateRequest("POST", `https://music.163.com/api/videotimeline/videogroup/otherclient/get`, data, options)
+	code, reBody, _ := util.CreateRequest("POST", `https://music.163.com/api/videotimeline/videogroup/otherclient/get`, data, options)
 
-	return reBody
+	return code, reBody
 }

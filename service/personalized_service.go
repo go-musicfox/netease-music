@@ -1,15 +1,15 @@
 package service
 
 import (
-	"net/http"
 	"github.com/anhoder/netease-music/util"
+	"net/http"
 )
 
 type PersonalizedService struct {
 	Limit string `json:"limit" form:"limit"`
 }
 
-func (service *PersonalizedService) Personalized() map[string]interface{} {
+func (service *PersonalizedService) Personalized() (float64, string) {
 
 	cookiesOS := &http.Cookie{Name: "os", Value: "pc"}
 
@@ -25,7 +25,7 @@ func (service *PersonalizedService) Personalized() map[string]interface{} {
 	}
 	data["order"] = "true"
 	data["n"] = "1000"
-	reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/personalized/playlist`, data, options)
+	code, reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/personalized/playlist`, data, options)
 
-	return reBody
+	return code, reBody
 }

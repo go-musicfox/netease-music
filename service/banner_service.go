@@ -8,7 +8,7 @@ type BannerService struct {
 	Type string `json:"type" form:"type"`
 }
 
-func (service *BannerService) Banner() map[string]interface{} {
+func (service *BannerService) Banner() (float64, string) {
 
 	options := &util.Options{
 		Crypto:  "linuxapi",
@@ -28,7 +28,7 @@ func (service *BannerService) Banner() map[string]interface{} {
 	}
 	data["clientType"] = service.Type
 
-	reBody, _ := util.CreateRequest("POST", `https://music.163.com/api/v2/banner/get`, data, options)
+	code, reBody, _ := util.CreateRequest("POST", `https://music.163.com/api/v2/banner/get`, data, options)
 
-	return reBody
+	return code, reBody
 }

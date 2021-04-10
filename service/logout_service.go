@@ -7,14 +7,14 @@ import (
 type LogoutService struct {
 }
 
-func (service *LogoutService) Logout() map[string]interface{} {
+func (service *LogoutService) Logout() (float64, string) {
 
 	options := &util.Options{
 		Crypto:  "weapi",
 		Ua:      "pc",
 	}
 	data := make(map[string]string)
-	reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/logout`, data, options)
+	code, reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/logout`, data, options)
 
-	return reBody
+	return code, reBody
 }

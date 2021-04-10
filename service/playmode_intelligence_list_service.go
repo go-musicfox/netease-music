@@ -11,7 +11,7 @@ type PlaymodeIntelligenceListService struct {
 	Count        string `json:"count" form:"count"`
 }
 
-func (service *PlaymodeIntelligenceListService) PlaymodeIntelligenceList() map[string]interface{} {
+func (service *PlaymodeIntelligenceListService) PlaymodeIntelligenceList() (float64, string) {
 
 	options := &util.Options{
 		Crypto:  "weapi",
@@ -32,7 +32,7 @@ func (service *PlaymodeIntelligenceListService) PlaymodeIntelligenceList() map[s
 		data["count"] = service.Count
 	}
 
-	reBody, _ := util.CreateRequest("POST", `http://music.163.com/weapi/playmode/intelligence/list`, data, options)
+	code, reBody, _ := util.CreateRequest("POST", `http://music.163.com/weapi/playmode/intelligence/list`, data, options)
 
-	return reBody
+	return code, reBody
 }

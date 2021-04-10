@@ -1,8 +1,8 @@
 package service
 
 import (
-	"net/http"
 	"github.com/anhoder/netease-music/util"
+	"net/http"
 )
 
 type MvUrlService struct {
@@ -10,7 +10,7 @@ type MvUrlService struct {
 	R  string `json:"r" form:"r"`
 }
 
-func (service *MvUrlService) MvUrl() map[string]interface{} {
+func (service *MvUrlService) MvUrl() (float64, string) {
 
 	cookiesOS := &http.Cookie{Name: "os", Value: "pc"}
 
@@ -26,7 +26,7 @@ func (service *MvUrlService) MvUrl() map[string]interface{} {
 		data["r"] = service.R
 	}
 
-	reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/song/enhance/play/mv/url`, data, options)
+	code, reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/song/enhance/play/mv/url`, data, options)
 
-	return reBody
+	return code, reBody
 }

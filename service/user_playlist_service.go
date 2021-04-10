@@ -10,7 +10,7 @@ type UserPlaylistService struct {
 	Offset string `json:"offset" form:"offset"`
 }
 
-func (service *UserPlaylistService) UserPlaylist() map[string]interface{} {
+func (service *UserPlaylistService) UserPlaylist() (float64, string) {
 
 	options := &util.Options{
 		Crypto:  "weapi",
@@ -27,7 +27,7 @@ func (service *UserPlaylistService) UserPlaylist() map[string]interface{} {
 	} else {
 		data["offset"] = service.Offset
 	}
-	reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/user/playlist`, data, options)
+	code, reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/user/playlist`, data, options)
 
-	return reBody
+	return code, reBody
 }

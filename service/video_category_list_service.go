@@ -9,7 +9,7 @@ type VideoCategoryListService struct {
 	Offset string `json:"offset" form:"offset"`
 }
 
-func (service *VideoCategoryListService) VideoCategoryList() map[string]interface{} {
+func (service *VideoCategoryListService) VideoCategoryList() (float64, string) {
 
 	options := &util.Options{
 		Crypto:  "weapi",
@@ -26,7 +26,7 @@ func (service *VideoCategoryListService) VideoCategoryList() map[string]interfac
 		data["offset"] = service.Offset
 	}
 	data["order"] = "true"
-	reBody, _ := util.CreateRequest("POST", `https://music.163.com/api/cloudvideo/category/list`, data, options)
+	code, reBody, _ := util.CreateRequest("POST", `https://music.163.com/api/cloudvideo/category/list`, data, options)
 
-	return reBody
+	return code, reBody
 }

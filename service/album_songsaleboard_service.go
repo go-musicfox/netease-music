@@ -12,7 +12,7 @@ type AlbumSongsaleboardService struct {
 	Year      string `json:"year" form:"year"`
 }
 
-func (service *AlbumSongsaleboardService) AlbumSongsaleboard() map[string]interface{} {
+func (service *AlbumSongsaleboardService) AlbumSongsaleboard() (float64, string) {
 
 	options := &util.Options{
 		Crypto:  "weapi",
@@ -38,7 +38,7 @@ func (service *AlbumSongsaleboardService) AlbumSongsaleboard() map[string]interf
 	if service.Type == "year" {
 		data["year"] = service.Year
 	}
-	reBody, _ := util.CreateRequest("POST", `https://music.163.com/api/feealbum/songsaleboard/`+service.Type+"/type", data, options)
+	code, reBody, _ := util.CreateRequest("POST", `https://music.163.com/api/feealbum/songsaleboard/`+service.Type+"/type", data, options)
 
-	return reBody
+	return code, reBody
 }

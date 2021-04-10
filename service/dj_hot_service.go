@@ -9,7 +9,7 @@ type DjHotService struct {
 	Offset string `json:"offset" form:"offset"`
 }
 
-func (service *DjHotService) DjHot() map[string]interface{} {
+func (service *DjHotService) DjHot() (float64, string) {
 
 	options := &util.Options{
 		Crypto:  "weapi",
@@ -27,7 +27,7 @@ func (service *DjHotService) DjHot() map[string]interface{} {
 
 		data["offset"] = service.Offset
 	}
-	reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/djradio/hot/v1`, data, options)
+	code, reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/djradio/hot/v1`, data, options)
 
-	return reBody
+	return code, reBody
 }

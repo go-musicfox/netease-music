@@ -9,7 +9,7 @@ type MsgNoticesService struct {
 	LastTime string `json:"lasttime" form:"lasttime"`
 }
 
-func (service *MsgNoticesService) MsgNotices() map[string]interface{} {
+func (service *MsgNoticesService) MsgNotices() (float64, string) {
 
 	options := &util.Options{
 		Crypto:  "weapi",
@@ -25,7 +25,7 @@ func (service *MsgNoticesService) MsgNotices() map[string]interface{} {
 	} else {
 		data["time"] = service.LastTime
 	}
-	reBody, _ := util.CreateRequest("POST", `https://music.163.com/api/msg/notices`, data, options)
+	code, reBody, _ := util.CreateRequest("POST", `https://music.163.com/api/msg/notices`, data, options)
 
-	return reBody
+	return code, reBody
 }

@@ -9,7 +9,7 @@ type MsgForwardsService struct {
 	Offset string `json:"offset" form:"offset"`
 }
 
-func (service *MsgForwardsService) MsgForwards() map[string]interface{} {
+func (service *MsgForwardsService) MsgForwards() (float64, string) {
 
 	options := &util.Options{
 		Crypto:  "weapi",
@@ -26,7 +26,7 @@ func (service *MsgForwardsService) MsgForwards() map[string]interface{} {
 		data["offset"] = service.Offset
 	}
 	data["order"] = "true"
-	reBody, _ := util.CreateRequest("POST", `https://music.163.com/api/forwards/get`, data, options)
+	code, reBody, _ := util.CreateRequest("POST", `https://music.163.com/api/forwards/get`, data, options)
 
-	return reBody
+	return code, reBody
 }

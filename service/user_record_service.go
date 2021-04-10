@@ -9,7 +9,7 @@ type UserRecordService struct {
 	Type string `json:"type" form:"type"`
 }
 
-func (service *UserRecordService) UserRecord() map[string]interface{} {
+func (service *UserRecordService) UserRecord() (float64, string) {
 
 	options := &util.Options{
 		Crypto:  "weapi",
@@ -22,7 +22,7 @@ func (service *UserRecordService) UserRecord() map[string]interface{} {
 	} else {
 		data["type"] = "0"
 	}
-	reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/v1/play/record`, data, options)
+	code, reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/v1/play/record`, data, options)
 
-	return reBody
+	return code, reBody
 }

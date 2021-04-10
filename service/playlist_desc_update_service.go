@@ -9,7 +9,7 @@ type PlaylistDescUpdateService struct {
 	Desc string `json:"desc" form:"desc"`
 }
 
-func (service *PlaylistDescUpdateService) PlaylistDescUpdate() map[string]interface{} {
+func (service *PlaylistDescUpdateService) PlaylistDescUpdate() (float64, string) {
 
 	options := &util.Options{
 		Crypto:  "eapi",
@@ -18,7 +18,7 @@ func (service *PlaylistDescUpdateService) PlaylistDescUpdate() map[string]interf
 	data := make(map[string]string)
 	data["id"] = service.Id
 	data["desc"] = service.Desc
-	reBody, _ := util.CreateRequest("POST", `http://interface3.music.163.com/eapi/playlist/desc/update`, data, options)
+	code, reBody, _ := util.CreateRequest("POST", `http://interface3.music.163.com/eapi/playlist/desc/update`, data, options)
 
-	return reBody
+	return code, reBody
 }

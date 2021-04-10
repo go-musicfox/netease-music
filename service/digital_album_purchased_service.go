@@ -9,7 +9,7 @@ type DigitalAlbumPurchasedService struct {
 	Offset string `json:"offset" form:"offset"`
 }
 
-func (service *DigitalAlbumPurchasedService) DigitalAlbumPurchased() map[string]interface{} {
+func (service *DigitalAlbumPurchasedService) DigitalAlbumPurchased() (float64, string) {
 
 	options := &util.Options{
 		Crypto:  "weapi",
@@ -26,7 +26,7 @@ func (service *DigitalAlbumPurchasedService) DigitalAlbumPurchased() map[string]
 		data["offset"] = service.Offset
 	}
 	data["order"] = "true"
-	reBody, _ := util.CreateRequest("POST", `https://music.163.com/api/digitalAlbum/purchased`, data, options)
+	code, reBody, _ := util.CreateRequest("POST", `https://music.163.com/api/digitalAlbum/purchased`, data, options)
 
-	return reBody
+	return code, reBody
 }

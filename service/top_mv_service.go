@@ -1,8 +1,8 @@
 package service
 
 import (
-	"net/http"
 	"github.com/anhoder/netease-music/util"
+	"net/http"
 )
 
 type TopMvService struct {
@@ -11,7 +11,7 @@ type TopMvService struct {
 	Offset string `json:"offset" form:"offset"`
 }
 
-func (service *TopMvService) TopMv() map[string]interface{} {
+func (service *TopMvService) TopMv() (float64, string) {
 
 	cookiesOS := &http.Cookie{Name: "os", Value: "pc"}
 
@@ -32,7 +32,7 @@ func (service *TopMvService) TopMv() map[string]interface{} {
 		data["offset"] = service.Offset
 	}
 	data["order"] = "true"
-	reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/mv/toplist`, data, options)
+	code, reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/mv/toplist`, data, options)
 
-	return reBody
+	return code, reBody
 }

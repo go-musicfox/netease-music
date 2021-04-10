@@ -1,8 +1,8 @@
 package service
 
 import (
-	"net/http"
 	"github.com/anhoder/netease-music/util"
+	"net/http"
 )
 
 type CaptchaVerifyService struct {
@@ -11,7 +11,7 @@ type CaptchaVerifyService struct {
 	Captcha   string `json:"captcha" form:"captcha"`
 }
 
-func (service *CaptchaVerifyService) CaptchaVerify() map[string]interface{} {
+func (service *CaptchaVerifyService) CaptchaVerify() (float64, string) {
 
 	cookiesOS := &http.Cookie{Name: "os", Value: "pc"}
 
@@ -28,7 +28,7 @@ func (service *CaptchaVerifyService) CaptchaVerify() map[string]interface{} {
 	data["cellphone"] = service.Cellphone
 	data["captcha"] = service.Captcha
 
-	reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/sms/captcha/verify`, data, options)
+	code, reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/sms/captcha/verify`, data, options)
 
-	return reBody
+	return code, reBody
 }

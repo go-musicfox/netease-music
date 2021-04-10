@@ -10,7 +10,7 @@ type ProgramRecommendService struct {
 	Offset string `json:"offset" form:"offset"`
 }
 
-func (service *ProgramRecommendService) ProgramRecommend() map[string]interface{} {
+func (service *ProgramRecommendService) ProgramRecommend() (float64, string) {
 
 	options := &util.Options{
 		Crypto:  "weapi",
@@ -28,7 +28,7 @@ func (service *ProgramRecommendService) ProgramRecommend() map[string]interface{
 		data["offset"] = service.Offset
 	}
 	data["order"] = "true"
-	reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/program/recommend/v1`, data, options)
+	code, reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/program/recommend/v1`, data, options)
 
-	return reBody
+	return code, reBody
 }

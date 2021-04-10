@@ -11,7 +11,7 @@ type SearchService struct {
 	Offset string `json:"offset" form:"offset"`
 }
 
-func (service *SearchService) Search() map[string]interface{} {
+func (service *SearchService) Search() (float64, string) {
 
 	options := &util.Options{
 		Crypto:  "weapi",
@@ -32,7 +32,7 @@ func (service *SearchService) Search() map[string]interface{} {
 	data["type"] = service.Type
 	data["s"] = service.S
 
-	reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/search/get`, data, options)
+	code, reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/search/get`, data, options)
 
-	return reBody
+	return code, reBody
 }

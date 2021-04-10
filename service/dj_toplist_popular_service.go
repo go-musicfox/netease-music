@@ -8,7 +8,7 @@ type DjToplistPopularService struct {
 	Limit string `json:"limit" form:"limit"`
 }
 
-func (service *DjToplistPopularService) DjToplistPopular() map[string]interface{} {
+func (service *DjToplistPopularService) DjToplistPopular() (float64, string) {
 
 	options := &util.Options{
 		Crypto:  "weapi",
@@ -20,7 +20,7 @@ func (service *DjToplistPopularService) DjToplistPopular() map[string]interface{
 		data["limit"] = service.Limit
 	}
 
-	reBody, _ := util.CreateRequest("POST", `https://music.163.com/api/dj/toplist/popular`, data, options)
+	code, reBody, _ := util.CreateRequest("POST", `https://music.163.com/api/dj/toplist/popular`, data, options)
 
-	return reBody
+	return code, reBody
 }

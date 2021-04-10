@@ -7,13 +7,13 @@ import (
 type DjCategoryRecommendService struct {
 }
 
-func (service *DjCategoryRecommendService) DjCategoryRecommend() map[string]interface{} {
+func (service *DjCategoryRecommendService) DjCategoryRecommend() (float64, string) {
 
 	options := &util.Options{
 		Crypto:  "weapi",
 	}
 	data := make(map[string]string)
-	reBody, _ := util.CreateRequest("POST", `http://music.163.com/weapi/djradio/home/category/recommend`, data, options)
+	code, reBody, _ := util.CreateRequest("POST", `http://music.163.com/weapi/djradio/home/category/recommend`, data, options)
 
-	return reBody
+	return code, reBody
 }

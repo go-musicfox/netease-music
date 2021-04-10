@@ -9,7 +9,7 @@ type VideoSubService struct {
 	Id string `json:"id" form:"id"`
 }
 
-func (service *VideoSubService) VideoSub() map[string]interface{} {
+func (service *VideoSubService) VideoSub() (float64, string) {
 
 	options := &util.Options{
 		Crypto:  "weapi",
@@ -24,7 +24,7 @@ func (service *VideoSubService) VideoSub() map[string]interface{} {
 
 	data["id"] = service.Id
 
-	reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/cloudvideo/video/`+service.T, data, options)
+	code, reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/cloudvideo/video/`+service.T, data, options)
 
-	return reBody
+	return code, reBody
 }

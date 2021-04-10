@@ -10,14 +10,14 @@ type PersonalizedDjprogramService struct {
 	Offset string `json:"offset" form:"offset"`
 }
 
-func (service *PersonalizedDjprogramService) PersonalizedDjprogram() map[string]interface{} {
+func (service *PersonalizedDjprogramService) PersonalizedDjprogram() (float64, string) {
 
 	options := &util.Options{
 		Crypto:  "weapi",
 	}
 	data := make(map[string]string)
 
-	reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/personalized/djprogram`, data, options)
+	code, reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/personalized/djprogram`, data, options)
 
-	return reBody
+	return code, reBody
 }

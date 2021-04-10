@@ -13,7 +13,7 @@ type MvAllService struct {
 	Order  string `json:"order" form:"order"`
 }
 
-func (service *MvAllService) MvAll() map[string]interface{} {
+func (service *MvAllService) MvAll() (float64, string) {
 
 	options := &util.Options{
 		Crypto:  "weapi",
@@ -47,7 +47,7 @@ func (service *MvAllService) MvAll() map[string]interface{} {
 		data["offset"] = service.Offset
 	}
 	data["order"] = "true"
-	reBody, _ := util.CreateRequest("POST", `https://interface.music.163.com/api/mv/all`, data, options)
+	code, reBody, _ := util.CreateRequest("POST", `https://interface.music.163.com/api/mv/all`, data, options)
 
-	return reBody
+	return code, reBody
 }

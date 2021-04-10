@@ -11,7 +11,7 @@ type DigitalAlbumOrderingService struct {
 	Quantity      string `json:"quantity" form:"quantity"`
 }
 
-func (service *DigitalAlbumOrderingService) DigitalAlbumOrdering() map[string]interface{} {
+func (service *DigitalAlbumOrderingService) DigitalAlbumOrdering() (float64, string) {
 
 	options := &util.Options{
 		Crypto:  "weapi",
@@ -31,7 +31,7 @@ func (service *DigitalAlbumOrderingService) DigitalAlbumOrdering() map[string]in
 
 	data["digitalResources"] = string(dig)
 
-	reBody, _ := util.CreateRequest("POST", `https://music.163.com/api/ordering/web/digital`, data, options)
+	code, reBody, _ := util.CreateRequest("POST", `https://music.163.com/api/ordering/web/digital`, data, options)
 
-	return reBody
+	return code, reBody
 }

@@ -9,7 +9,7 @@ type VideoUrlService struct {
 	Res string `json:"resolution" form:"resolution"`
 }
 
-func (service *VideoUrlService) VideoUrl() map[string]interface{} {
+func (service *VideoUrlService) VideoUrl() (float64, string) {
 
 	options := &util.Options{
 		Crypto:  "weapi",
@@ -21,7 +21,7 @@ func (service *VideoUrlService) VideoUrl() map[string]interface{} {
 		data["resolution"] = service.Res
 	}
 	data["ids"] = `["` + service.ID + `"]`
-	reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/cloudvideo/playurl`, data, options)
+	code, reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/cloudvideo/playurl`, data, options)
 
-	return reBody
+	return code, reBody
 }

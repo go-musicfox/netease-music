@@ -11,7 +11,7 @@ type RebindService struct {
 	Ctcode     string `json:"ctcode" form:"ctcode"`
 }
 
-func (service *RebindService) Rebind() map[string]interface{} {
+func (service *RebindService) Rebind() (float64, string) {
 
 	options := &util.Options{
 		Crypto:  "weapi",
@@ -23,7 +23,7 @@ func (service *RebindService) Rebind() map[string]interface{} {
 	data["captcha"] = service.Captcha
 	data["oldcaptcha"] = service.Oldcaptcha
 
-	reBody, _ := util.CreateRequest("POST", `https://music.163.com/api/user/replaceCellphone`, data, options)
+	code, reBody, _ := util.CreateRequest("POST", `https://music.163.com/api/user/replaceCellphone`, data, options)
 
-	return reBody
+	return code, reBody
 }

@@ -9,7 +9,7 @@ type DjSubService struct {
 	T   string `json:"t" form:"t"`
 }
 
-func (service *DjSubService) DjSub() map[string]interface{} {
+func (service *DjSubService) DjSub() (float64, string) {
 
 	options := &util.Options{
 		Crypto:  "weapi",
@@ -21,7 +21,7 @@ func (service *DjSubService) DjSub() map[string]interface{} {
 	} else {
 		service.T = "unsub"
 	}
-	reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/djradio/`+service.T, data, options)
+	code, reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/djradio/`+service.T, data, options)
 
-	return reBody
+	return code, reBody
 }

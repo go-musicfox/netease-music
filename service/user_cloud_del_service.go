@@ -8,14 +8,14 @@ type UserCloudDelService struct {
 	ID string `json:"id" form:"id"`
 }
 
-func (service *UserCloudDelService) UserCloudDel() map[string]interface{} {
+func (service *UserCloudDelService) UserCloudDel() (float64, string) {
 
 	options := &util.Options{
 		Crypto:  "weapi",
 	}
 	data := make(map[string]string)
 	data["songIds"] = "[" + service.ID + "]"
-	reBody, _ := util.CreateRequest("POST", `http://music.163.com/weapi/cloud/del`, data, options)
+	code, reBody, _ := util.CreateRequest("POST", `http://music.163.com/weapi/cloud/del`, data, options)
 
-	return reBody
+	return code, reBody
 }

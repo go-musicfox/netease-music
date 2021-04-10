@@ -8,14 +8,14 @@ type DjProgramDetailService struct {
 	ID string `json:"id" form:"id"`
 }
 
-func (service *DjProgramDetailService) DjProgramDetail() map[string]interface{} {
+func (service *DjProgramDetailService) DjProgramDetail() (float64, string) {
 
 	options := &util.Options{
 		Crypto:  "weapi",
 	}
 	data := make(map[string]string)
 	data["id"] = service.ID
-	reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/dj/program/detail`, data, options)
+	code, reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/dj/program/detail`, data, options)
 
-	return reBody
+	return code, reBody
 }

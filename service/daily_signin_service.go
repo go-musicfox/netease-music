@@ -8,7 +8,7 @@ type DailySigninService struct {
 	Type string `json:"type" form:"type"`
 }
 
-func (service *DailySigninService) DailySignin() map[string]interface{} {
+func (service *DailySigninService) DailySignin() (float64, string) {
 
 	options := &util.Options{
 		Crypto:  "weapi",
@@ -21,7 +21,7 @@ func (service *DailySigninService) DailySignin() map[string]interface{} {
 		data["type"] = service.Type
 	}
 
-	reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/point/dailyTask`, data, options)
+	code, reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/point/dailyTask`, data, options)
 
-	return reBody
+	return code, reBody
 }

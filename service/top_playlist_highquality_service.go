@@ -10,7 +10,7 @@ type TopPlaylistHighqualityService struct {
 	LastTime string `json:"lasttime" form:"lasttime"`
 }
 
-func (service *TopPlaylistHighqualityService) TopPlaylistHighquality() map[string]interface{} {
+func (service *TopPlaylistHighqualityService) TopPlaylistHighquality() (float64, string) {
 
 	options := &util.Options{
 		Crypto:  "weapi",
@@ -31,7 +31,7 @@ func (service *TopPlaylistHighqualityService) TopPlaylistHighquality() map[strin
 	data["total"] = "true"
 	data["cat"] = service.Cat
 
-	reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/playlist/highquality/list`, data, options)
+	code, reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/playlist/highquality/list`, data, options)
 
-	return reBody
+	return code, reBody
 }

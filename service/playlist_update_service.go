@@ -1,8 +1,8 @@
 package service
 
 import (
-	"net/http"
 	"github.com/anhoder/netease-music/util"
+	"net/http"
 )
 
 type PlaylistUpdateService struct {
@@ -12,7 +12,7 @@ type PlaylistUpdateService struct {
 	Tags string `json:"tags" form:"tags"`
 }
 
-func (service *PlaylistUpdateService) PlaylistUpdate() map[string]interface{} {
+func (service *PlaylistUpdateService) PlaylistUpdate() (float64, string) {
 
 	cookiesOS := &http.Cookie{Name: "os", Value: "pc"}
 
@@ -24,7 +24,7 @@ func (service *PlaylistUpdateService) PlaylistUpdate() map[string]interface{} {
 	data["/api/playlist/desc/update"] = `{"id":` + service.Id + `,"desc":"` + service.Desc + `"}`
 	data["/api/playlist/tags/update"] = `{"id":` + service.Id + `,"tags":"` + service.Tags + `"}`
 	data["/api/playlist/update/name"] = `{"id":` + service.Id + `,"name":"` + service.Name + `"}`
-	reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/batch`, data, options)
+	code, reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/batch`, data, options)
 
-	return reBody
+	return code, reBody
 }

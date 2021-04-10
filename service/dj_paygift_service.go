@@ -9,7 +9,7 @@ type DjPaygiftService struct {
 	Offset string `json:"offset" form:"offset"`
 }
 
-func (service *DjPaygiftService) DjPaygift() map[string]interface{} {
+func (service *DjPaygiftService) DjPaygift() (float64, string) {
 
 	options := &util.Options{
 		Crypto:  "weapi",
@@ -26,7 +26,7 @@ func (service *DjPaygiftService) DjPaygift() map[string]interface{} {
 		data["offset"] = service.Offset
 	}
 	data["order"] = "true"
-	reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/djradio/home/paygift/list?_nmclfl=1`, data, options)
+	code, reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/djradio/home/paygift/list?_nmclfl=1`, data, options)
 
-	return reBody
+	return code, reBody
 }

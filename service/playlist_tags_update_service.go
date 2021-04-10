@@ -9,7 +9,7 @@ type PlaylistTagsUpdateService struct {
 	Tags string `json:"tags" form:"tags"`
 }
 
-func (service *PlaylistTagsUpdateService) PlaylistTagsUpdate() map[string]interface{} {
+func (service *PlaylistTagsUpdateService) PlaylistTagsUpdate() (float64, string) {
 
 	options := &util.Options{
 		Crypto:  "eapi",
@@ -18,7 +18,7 @@ func (service *PlaylistTagsUpdateService) PlaylistTagsUpdate() map[string]interf
 	data := make(map[string]string)
 	data["id"] = service.Id
 	data["tags"] = service.Tags
-	reBody, _ := util.CreateRequest("POST", `http://interface3.music.163.com/eapi/playlist/tags/update`, data, options)
+	code, reBody, _ := util.CreateRequest("POST", `http://interface3.music.163.com/eapi/playlist/tags/update`, data, options)
 
-	return reBody
+	return code, reBody
 }

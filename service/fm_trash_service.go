@@ -8,7 +8,7 @@ type FmTrashService struct {
 	SongID string `json:"id" form:"id"`
 }
 
-func (service *FmTrashService) FmTrash() map[string]interface{} {
+func (service *FmTrashService) FmTrash() (float64, string) {
 
 	options := &util.Options{
 		Crypto:  "weapi",
@@ -16,7 +16,7 @@ func (service *FmTrashService) FmTrash() map[string]interface{} {
 	data := make(map[string]string)
 	data["songId"] = service.SongID
 
-	reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/radio/trash/add?alg=RT&songId=`+service.SongID+`&time=25`, data, options)
+	code, reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/radio/trash/add?alg=RT&songId=`+service.SongID+`&time=25`, data, options)
 
-	return reBody
+	return code, reBody
 }

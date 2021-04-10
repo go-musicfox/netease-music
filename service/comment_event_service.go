@@ -11,7 +11,7 @@ type CommentEventService struct {
 	BeforeTime string `json:"beforeTime" form:"beforeTime"`
 }
 
-func (service *CommentEventService) CommentEvent() map[string]interface{} {
+func (service *CommentEventService) CommentEvent() (float64, string) {
 
 	options := &util.Options{
 		Crypto:  "weapi",
@@ -33,7 +33,7 @@ func (service *CommentEventService) CommentEvent() map[string]interface{} {
 		data["beforeTime"] = service.BeforeTime
 	}
 
-	reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/v1/resource/comments/`+service.ThreadId, data, options)
+	code, reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/v1/resource/comments/`+service.ThreadId, data, options)
 
-	return reBody
+	return code, reBody
 }

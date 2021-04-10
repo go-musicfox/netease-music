@@ -10,7 +10,7 @@ type MsgCommentsService struct {
 	BeforeTime string `json:"before" form:"before"`
 }
 
-func (service *MsgCommentsService) MsgComments() map[string]interface{} {
+func (service *MsgCommentsService) MsgComments() (float64, string) {
 
 	options := &util.Options{
 		Crypto:  "weapi",
@@ -28,7 +28,7 @@ func (service *MsgCommentsService) MsgComments() map[string]interface{} {
 		data["beforeTime"] = service.BeforeTime
 	}
 	data["order"] = "true"
-	reBody, _ := util.CreateRequest("POST", `https://music.163.com/api/v1/user/comments/`+service.UID, data, options)
+	code, reBody, _ := util.CreateRequest("POST", `https://music.163.com/api/v1/user/comments/`+service.UID, data, options)
 
-	return reBody
+	return code, reBody
 }

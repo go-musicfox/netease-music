@@ -14,7 +14,7 @@ type RegisterCellphoneService struct {
 	Nickname string `json:"nickname" form:"nickname"`
 }
 
-func (service *RegisterCellphoneService) RegisterCellphone() map[string]interface{} {
+func (service *RegisterCellphoneService) RegisterCellphone() (float64, string) {
 
 	cookiesOS := &http.Cookie{Name: "os", Value: "pc"}
 
@@ -31,7 +31,7 @@ func (service *RegisterCellphoneService) RegisterCellphone() map[string]interfac
 	data["captcha"] = service.Captcha
 	data["nickname"] = service.Nickname
 
-	reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/register/cellphone`, data, options)
+	code, reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/register/cellphone`, data, options)
 
-	return reBody
+	return code, reBody
 }

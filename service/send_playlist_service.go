@@ -1,8 +1,8 @@
 package service
 
 import (
-	"net/http"
 	"github.com/anhoder/netease-music/util"
+	"net/http"
 )
 
 type SendPlaylistService struct {
@@ -11,7 +11,7 @@ type SendPlaylistService struct {
 	UserIds string `json:"user_ids" form:"user_ids"`
 }
 
-func (service *SendPlaylistService) SendPlaylist() map[string]interface{} {
+func (service *SendPlaylistService) SendPlaylist() (float64, string) {
 
 	cookiesOS := &http.Cookie{Name: "os", Value: "pc"}
 
@@ -24,7 +24,7 @@ func (service *SendPlaylistService) SendPlaylist() map[string]interface{} {
 	data["type"] = "playlist"
 	data["msg"] = service.Msg
 	data["userIds"] = "[" + service.UserIds + "]"
-	reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/msg/private/send`, data, options)
+	code, reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/msg/private/send`, data, options)
 
-	return reBody
+	return code, reBody
 }

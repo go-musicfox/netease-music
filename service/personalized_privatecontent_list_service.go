@@ -9,7 +9,7 @@ type PersonalizedPrivatecontentListService struct {
 	Offset string `json:"offset" form:"offset"`
 }
 
-func (service *PersonalizedPrivatecontentListService) PersonalizedPrivatecontentList() map[string]interface{} {
+func (service *PersonalizedPrivatecontentListService) PersonalizedPrivatecontentList() (float64, string) {
 
 	options := &util.Options{
 		Crypto:  "weapi",
@@ -26,7 +26,7 @@ func (service *PersonalizedPrivatecontentListService) PersonalizedPrivatecontent
 		data["offset"] = service.Offset
 	}
 	data["order"] = "true"
-	reBody, _ := util.CreateRequest("POST", `https://music.163.com/api/v2/privatecontent/list`, data, options)
+	code, reBody, _ := util.CreateRequest("POST", `https://music.163.com/api/v2/privatecontent/list`, data, options)
 
-	return reBody
+	return code, reBody
 }

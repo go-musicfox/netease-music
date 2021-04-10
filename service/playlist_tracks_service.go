@@ -10,7 +10,7 @@ type PlaylistTracksService struct {
 	TrackIds string `json:"tracks" form:"tracks"`
 }
 
-func (service *PlaylistTracksService) PlaylistTracks() map[string]interface{} {
+func (service *PlaylistTracksService) PlaylistTracks() (float64, string) {
 
 	options := &util.Options{
 		Crypto:  "weapi",
@@ -19,7 +19,7 @@ func (service *PlaylistTracksService) PlaylistTracks() map[string]interface{} {
 	data["op"] = service.Op
 	data["pid"] = service.Pid
 	data["trackIds"] = "[" + service.TrackIds + "]"
-	reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/playlist/manipulate/tracks`, data, options)
+	code, reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/playlist/manipulate/tracks`, data, options)
 
-	return reBody
+	return code, reBody
 }

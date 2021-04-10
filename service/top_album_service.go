@@ -1,8 +1,8 @@
 package service
 
 import (
-	"net/http"
 	"github.com/anhoder/netease-music/util"
+	"net/http"
 	"strconv"
 	"time"
 )
@@ -16,7 +16,7 @@ type TopAlbumService struct {
 	Month  string `json:"month" form:"month"`
 }
 
-func (service *TopAlbumService) TopAlbum() map[string]interface{} {
+func (service *TopAlbumService) TopAlbum() (float64, string) {
 
 	cookiesOS := &http.Cookie{Name: "os", Value: "pc"}
 
@@ -53,7 +53,7 @@ func (service *TopAlbumService) TopAlbum() map[string]interface{} {
 	data["total"] = "true"
 	data["rcmd"] = "false"
 
-	reBody, _ := util.CreateRequest("POST", `https://music.163.com/api/discovery/new/albums/area`, data, options)
+	code, reBody, _ := util.CreateRequest("POST", `https://music.163.com/api/discovery/new/albums/area`, data, options)
 
-	return reBody
+	return code, reBody
 }

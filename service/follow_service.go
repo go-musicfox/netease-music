@@ -1,8 +1,8 @@
 package service
 
 import (
-	"net/http"
 	"github.com/anhoder/netease-music/util"
+	"net/http"
 )
 
 type FollowService struct {
@@ -10,7 +10,7 @@ type FollowService struct {
 	Id string `json:"id" form:"id"`
 }
 
-func (service *FollowService) Follow() map[string]interface{} {
+func (service *FollowService) Follow() (float64, string) {
 
 	cookiesOS := &http.Cookie{Name: "os", Value: "pc"}
 
@@ -25,7 +25,7 @@ func (service *FollowService) Follow() map[string]interface{} {
 		service.T = "delfollow"
 	}
 
-	reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/user/`+service.T+`/`+service.Id, data, options)
+	code, reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/user/`+service.T+`/`+service.Id, data, options)
 
-	return reBody
+	return code, reBody
 }

@@ -8,7 +8,7 @@ type DjTodayPerferedService struct {
 	Page string `json:"page" form:"page"`
 }
 
-func (service *DjTodayPerferedService) DjTodayPerfered() map[string]interface{} {
+func (service *DjTodayPerferedService) DjTodayPerfered() (float64, string) {
 
 	options := &util.Options{
 		Crypto:  "weapi",
@@ -19,7 +19,7 @@ func (service *DjTodayPerferedService) DjTodayPerfered() map[string]interface{} 
 	} else {
 		data["page"] = service.Page
 	}
-	reBody, _ := util.CreateRequest("POST", `http://music.163.com/weapi/djradio/home/today/perfered`, data, options)
+	code, reBody, _ := util.CreateRequest("POST", `http://music.163.com/weapi/djradio/home/today/perfered`, data, options)
 
-	return reBody
+	return code, reBody
 }

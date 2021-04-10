@@ -10,7 +10,7 @@ type AlbumListStyleService struct {
 	Offset string `json:"offset" form:"offset"`
 }
 
-func (service *AlbumListStyleService) AlbumListStyle() map[string]interface{} {
+func (service *AlbumListStyleService) AlbumListStyle() (float64, string) {
 
 	options := &util.Options{
 		Crypto:  "weapi",
@@ -31,7 +31,7 @@ func (service *AlbumListStyleService) AlbumListStyle() map[string]interface{} {
 	}
 	data["order"] = "true"
 	data["area"] = service.Area
-	reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/vipmall/appalbum/album/style`, data, options)
+	code, reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/vipmall/appalbum/album/style`, data, options)
 
-	return reBody
+	return code, reBody
 }

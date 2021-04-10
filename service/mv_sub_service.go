@@ -9,7 +9,7 @@ type MvSubService struct {
 	MvId string `json:"mvid" form:"mvid"`
 }
 
-func (service *MvSubService) MvSub() map[string]interface{} {
+func (service *MvSubService) MvSub() (float64, string) {
 
 	options := &util.Options{
 		Crypto:  "weapi",
@@ -25,7 +25,7 @@ func (service *MvSubService) MvSub() map[string]interface{} {
 	data["mvId"] = service.MvId
 	data["mvIds"] = "[" + service.MvId + "]"
 
-	reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/mv/`+service.T, data, options)
+	code, reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/mv/`+service.T, data, options)
 
-	return reBody
+	return code, reBody
 }

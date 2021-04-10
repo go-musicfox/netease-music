@@ -8,7 +8,7 @@ type VideoTimelineAllService struct {
 	Offset string `json:"offset" form:"offset"`
 }
 
-func (service *VideoTimelineAllService) VideoTimelineAll() map[string]interface{} {
+func (service *VideoTimelineAllService) VideoTimelineAll() (float64, string) {
 
 	options := &util.Options{
 		Crypto:  "weapi",
@@ -22,7 +22,7 @@ func (service *VideoTimelineAllService) VideoTimelineAll() map[string]interface{
 	}
 	data["order"] = "true"
 	data["need_preview_url"] = "true"
-	reBody, _ := util.CreateRequest("POST", `https://music.163.com/api/videotimeline/otherclient/get`, data, options)
+	code, reBody, _ := util.CreateRequest("POST", `https://music.163.com/api/videotimeline/otherclient/get`, data, options)
 
-	return reBody
+	return code, reBody
 }

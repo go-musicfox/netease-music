@@ -9,7 +9,7 @@ type HotTopicService struct {
 	Offset string `json:"offset" form:"offset"`
 }
 
-func (service *HotTopicService) HotTopic() map[string]interface{} {
+func (service *HotTopicService) HotTopic() (float64, string) {
 
 	options := &util.Options{
 		Crypto:  "weapi",
@@ -26,7 +26,7 @@ func (service *HotTopicService) HotTopic() map[string]interface{} {
 		data["offset"] = service.Offset
 	}
 	data["order"] = "true"
-	reBody, _ := util.CreateRequest("POST", `http://music.163.com/weapi/act/hot`, data, options)
+	code, reBody, _ := util.CreateRequest("POST", `http://music.163.com/weapi/act/hot`, data, options)
 
-	return reBody
+	return code, reBody
 }

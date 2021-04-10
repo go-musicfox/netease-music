@@ -7,7 +7,7 @@ import (
 type PersonalizedNewsongService struct {
 }
 
-func (service *PersonalizedNewsongService) PersonalizedNewsong() map[string]interface{} {
+func (service *PersonalizedNewsongService) PersonalizedNewsong() (float64, string) {
 
 	options := &util.Options{
 		Crypto:  "weapi",
@@ -15,7 +15,7 @@ func (service *PersonalizedNewsongService) PersonalizedNewsong() map[string]inte
 	data := make(map[string]string)
 
 	data["type"] = "recommend"
-	reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/personalized/newsong`, data, options)
+	code, reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/personalized/newsong`, data, options)
 
-	return reBody
+	return code, reBody
 }

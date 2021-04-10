@@ -1,15 +1,15 @@
 package service
 
 import (
-	"net/http"
 	"github.com/anhoder/netease-music/util"
+	"net/http"
 )
 
 type RecommendSongsService struct {
 	ID string `json:"id" form:"id"`
 }
 
-func (service *RecommendSongsService) RecommendSongs() map[string]interface{} {
+func (service *RecommendSongsService) RecommendSongs() (float64, string) {
 
 	cookiesOS := &http.Cookie{Name: "os", Value: "ios"}
 
@@ -18,7 +18,7 @@ func (service *RecommendSongsService) RecommendSongs() map[string]interface{} {
 		Cookies: []*http.Cookie{cookiesOS},
 	}
 	data := make(map[string]string)
-	reBody, _ := util.CreateRequest("POST", `https://music.163.com/api/v3/discovery/recommend/songs`, data, options)
+	code, reBody, _ := util.CreateRequest("POST", `https://music.163.com/api/v3/discovery/recommend/songs`, data, options)
 
-	return reBody
+	return code, reBody
 }

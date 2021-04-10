@@ -7,13 +7,13 @@ import (
 type DjCatelistService struct {
 }
 
-func (service *DjCatelistService) DjCatelist() map[string]interface{} {
+func (service *DjCatelistService) DjCatelist() (float64, string) {
 
 	options := &util.Options{
 		Crypto:  "weapi",
 	}
 	data := make(map[string]string)
-	reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/djradio/category/get`, data, options)
+	code, reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/djradio/category/get`, data, options)
 
-	return reBody
+	return code, reBody
 }

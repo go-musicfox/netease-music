@@ -7,7 +7,7 @@ import (
 type SearchHotService struct {
 }
 
-func (service *SearchHotService) SearchHot() map[string]interface{} {
+func (service *SearchHotService) SearchHot() (float64, string) {
 
 	options := &util.Options{
 		Crypto:  "weapi",
@@ -16,7 +16,7 @@ func (service *SearchHotService) SearchHot() map[string]interface{} {
 	data := make(map[string]string)
 	data["type"] = "1111"
 
-	reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/search/hot`, data, options)
+	code, reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/search/hot`, data, options)
 
-	return reBody
+	return code, reBody
 }

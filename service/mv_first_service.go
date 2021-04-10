@@ -9,7 +9,7 @@ type MvFirstService struct {
 	Limit string `json:"limit" form:"limit"`
 }
 
-func (service *MvFirstService) MvFirst() map[string]interface{} {
+func (service *MvFirstService) MvFirst() (float64, string) {
 
 	options := &util.Options{
 		Crypto:  "weapi",
@@ -23,7 +23,7 @@ func (service *MvFirstService) MvFirst() map[string]interface{} {
 	}
 
 	data["order"] = "true"
-	reBody, _ := util.CreateRequest("POST", `https://interface.music.163.com/weapi/mv/first`, data, options)
+	code, reBody, _ := util.CreateRequest("POST", `https://interface.music.163.com/weapi/mv/first`, data, options)
 
-	return reBody
+	return code, reBody
 }

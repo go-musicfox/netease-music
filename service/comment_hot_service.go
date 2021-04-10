@@ -1,8 +1,8 @@
 package service
 
 import (
-	"net/http"
 	"github.com/anhoder/netease-music/util"
+	"net/http"
 )
 
 type CommentHotService struct {
@@ -13,7 +13,7 @@ type CommentHotService struct {
 	Type   string `json:"type" form:"type"`
 }
 
-func (service *CommentHotService) CommentHot() map[string]interface{} {
+func (service *CommentHotService) CommentHot() (float64, string) {
 
 	cookiesOS := &http.Cookie{Name: "os", Value: "pc"}
 
@@ -51,7 +51,7 @@ func (service *CommentHotService) CommentHot() map[string]interface{} {
 	} else {
 		data["beforeTime"] = service.Before
 	}
-	reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/v1/resource/hotcomments/`+service.Type+service.ID, data, options)
+	code, reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/v1/resource/hotcomments/`+service.Type+service.ID, data, options)
 
-	return reBody
+	return code, reBody
 }

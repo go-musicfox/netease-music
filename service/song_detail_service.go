@@ -2,8 +2,8 @@ package service
 
 import (
 	"encoding/json"
-	"net/http"
 	"github.com/anhoder/netease-music/util"
+	"net/http"
 	"strings"
 )
 
@@ -11,7 +11,7 @@ type SongDetailService struct {
 	Ids string `json:"ids" form:"ids"`
 }
 
-func (service *SongDetailService) SongDetail() map[string]interface{} {
+func (service *SongDetailService) SongDetail() (float64, string) {
 
 	cookiesOS := &http.Cookie{Name: "os", Value: "pc"}
 
@@ -35,7 +35,7 @@ func (service *SongDetailService) SongDetail() map[string]interface{} {
 	data := make(map[string]string)
 	data["c"] = string(sidsJsonByte)
 	data["ids"] = "[" + service.Ids + "]"
-	reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/v3/song/detail`, data, options)
+	code, reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/v3/song/detail`, data, options)
 
-	return reBody
+	return code, reBody
 }

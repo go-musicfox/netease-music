@@ -8,13 +8,13 @@ type UserDetailService struct {
 	Uid string `json:"uid" form:"uid"`
 }
 
-func (service *UserDetailService) UserDetail() map[string]interface{} {
+func (service *UserDetailService) UserDetail() (float64, string) {
 
 	options := &util.Options{
 		Crypto:  "weapi",
 	}
 	data := make(map[string]string)
-	reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/v1/user/detail/`+service.Uid, data, options)
+	code, reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/v1/user/detail/`+service.Uid, data, options)
 
-	return reBody
+	return code, reBody
 }

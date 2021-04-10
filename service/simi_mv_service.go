@@ -10,14 +10,14 @@ type SimiMvService struct {
 	Offset string `json:"offset" form:"offset"`
 }
 
-func (service *SimiMvService) SimiMv() map[string]interface{} {
+func (service *SimiMvService) SimiMv() (float64, string) {
 
 	options := &util.Options{
 		Crypto:  "weapi",
 	}
 	data := make(map[string]string)
 	data["mvid"] = service.ID
-	reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/discovery/simiMV`, data, options)
+	code, reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/discovery/simiMV`, data, options)
 
-	return reBody
+	return code, reBody
 }

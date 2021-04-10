@@ -8,7 +8,7 @@ type UserAudioService struct {
 	UID string `json:"uid" form:"uid"`
 }
 
-func (service *UserAudioService) UserAudio() map[string]interface{} {
+func (service *UserAudioService) UserAudio() (float64, string) {
 
 	options := &util.Options{
 		Crypto:  "weapi",
@@ -16,7 +16,7 @@ func (service *UserAudioService) UserAudio() map[string]interface{} {
 	data := make(map[string]string)
 	data["userId"] = service.UID
 
-	reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/djradio/get/byuser`, data, options)
+	code, reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/djradio/get/byuser`, data, options)
 
-	return reBody
+	return code, reBody
 }

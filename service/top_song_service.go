@@ -8,7 +8,7 @@ type TopSongService struct {
 	AreaId string `json:"type" form:"type"`
 }
 
-func (service *TopSongService) TopSong() map[string]interface{} {
+func (service *TopSongService) TopSong() (float64, string) {
 
 	options := &util.Options{
 		Crypto:  "weapi",
@@ -19,7 +19,7 @@ func (service *TopSongService) TopSong() map[string]interface{} {
 	}
 	data["areaId"] = service.AreaId
 	data["total"] = "true"
-	reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/v1/discovery/new/songs`, data, options)
+	code, reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/v1/discovery/new/songs`, data, options)
 
-	return reBody
+	return code, reBody
 }

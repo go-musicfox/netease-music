@@ -9,7 +9,7 @@ type CellphoneExistenceCheckService struct {
 	Countrycode string `json:"countrycode" form:"countrycode"`
 }
 
-func (service *CellphoneExistenceCheckService) CellphoneExistenceCheck() map[string]interface{} {
+func (service *CellphoneExistenceCheckService) CellphoneExistenceCheck() (float64, string) {
 
 	options := &util.Options{
 		Crypto:  "eapi",
@@ -21,7 +21,7 @@ func (service *CellphoneExistenceCheckService) CellphoneExistenceCheck() map[str
 	}
 	data["cellphone"] = service.Cellphone
 
-	reBody, _ := util.CreateRequest("POST", `http://music.163.com/eapi/cellphone/existence/check`, data, options)
+	code, reBody, _ := util.CreateRequest("POST", `http://music.163.com/eapi/cellphone/existence/check`, data, options)
 
-	return reBody
+	return code, reBody
 }

@@ -11,7 +11,7 @@ type TopPlaylistService struct {
 	Offset string `json:"offset" form:"offset"`
 }
 
-func (service *TopPlaylistService) TopPlaylist() map[string]interface{} {
+func (service *TopPlaylistService) TopPlaylist() (float64, string) {
 
 	options := &util.Options{
 		Crypto:  "weapi",
@@ -36,7 +36,7 @@ func (service *TopPlaylistService) TopPlaylist() map[string]interface{} {
 	data["hot"] = service.Order
 	data["cat"] = service.Cat
 
-	reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/playlist/list`, data, options)
+	code, reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/playlist/list`, data, options)
 
-	return reBody
+	return code, reBody
 }

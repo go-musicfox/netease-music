@@ -10,7 +10,7 @@ type ArtistMvService struct {
 	Offset string `json:"offset" form:"offset"`
 }
 
-func (service *ArtistMvService) ArtistMv() map[string]interface{} {
+func (service *ArtistMvService) ArtistMv() (float64, string) {
 
 	options := &util.Options{
 		Crypto:  "weapi",
@@ -28,7 +28,7 @@ func (service *ArtistMvService) ArtistMv() map[string]interface{} {
 		data["offset"] = service.Offset
 	}
 	data["total"] = "true"
-	reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/artist/mvs`, data, options)
+	code, reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/artist/mvs`, data, options)
 
-	return reBody
+	return code, reBody
 }

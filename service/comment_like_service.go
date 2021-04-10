@@ -1,8 +1,8 @@
 package service
 
 import (
-	"net/http"
 	"github.com/anhoder/netease-music/util"
+	"net/http"
 )
 
 type CommentLikeService struct {
@@ -13,7 +13,7 @@ type CommentLikeService struct {
 	Type     string `json:"type" form:"type"`
 }
 
-func (service *CommentLikeService) CommentLike() map[string]interface{} {
+func (service *CommentLikeService) CommentLike() (float64, string) {
 
 	// 获得所有cookie
 	cookiesOS := &http.Cookie{Name: "os", Value: "pc"}
@@ -52,7 +52,7 @@ func (service *CommentLikeService) CommentLike() map[string]interface{} {
 		service.T = "unlike"
 	}
 
-	reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/v1/comment/`+service.T, data, options)
+	code, reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/v1/comment/`+service.T, data, options)
 
-	return reBody
+	return code, reBody
 }

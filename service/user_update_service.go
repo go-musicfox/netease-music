@@ -14,7 +14,7 @@ type UserUpdateService struct {
 	Signature   string `json:"signature" form:"signature"`
 }
 
-func (service *UserUpdateService) UserUpdate() map[string]interface{} {
+func (service *UserUpdateService) UserUpdate() (float64, string) {
 
 	options := &util.Options{
 		Crypto:  "weapi",
@@ -28,7 +28,7 @@ func (service *UserUpdateService) UserUpdate() map[string]interface{} {
 	data["province"] = service.Province
 	data["signature"] = service.Signature
 
-	reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/user/profile/update`, data, options)
+	code, reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/user/profile/update`, data, options)
 
-	return reBody
+	return code, reBody
 }

@@ -11,7 +11,7 @@ type DjProgramService struct {
 	Asc    string `json:"asc" form:"asc"`
 }
 
-func (service *DjProgramService) DjProgram() map[string]interface{} {
+func (service *DjProgramService) DjProgram() (float64, string) {
 
 	options := &util.Options{
 		Crypto:  "weapi",
@@ -29,7 +29,7 @@ func (service *DjProgramService) DjProgram() map[string]interface{} {
 		data["offset"] = service.Offset
 	}
 	data["asc"] = service.Asc
-	reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/dj/program/byradio`, data, options)
+	code, reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/dj/program/byradio`, data, options)
 
-	return reBody
+	return code, reBody
 }

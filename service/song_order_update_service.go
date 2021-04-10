@@ -9,7 +9,7 @@ type SongOrderUpdateService struct {
 	Ids string `json:"ids" form:"ids"`
 }
 
-func (service *SongOrderUpdateService) SongOrderUpdate() map[string]interface{} {
+func (service *SongOrderUpdateService) SongOrderUpdate() (float64, string) {
 
 	options := &util.Options{
 		Crypto:  "weapi",
@@ -19,7 +19,7 @@ func (service *SongOrderUpdateService) SongOrderUpdate() map[string]interface{} 
 	data["pid"] = service.Pid
 	data["trackIds"] = service.Ids
 	data["op"] = "update"
-	reBody, _ := util.CreateRequest("POST", `http://interface.music.163.com/api/playlist/manipulate/tracks`, data, options)
+	code, reBody, _ := util.CreateRequest("POST", `http://interface.music.163.com/api/playlist/manipulate/tracks`, data, options)
 
-	return reBody
+	return code, reBody
 }

@@ -10,7 +10,7 @@ type UserFollowedsService struct {
 	Time  string `json:"lasttime " form:"lasttime "`
 }
 
-func (service *UserFollowedsService) UserFolloweds() map[string]interface{} {
+func (service *UserFollowedsService) UserFolloweds() (float64, string) {
 
 	options := &util.Options{
 		Crypto:  "eapi",
@@ -28,7 +28,7 @@ func (service *UserFollowedsService) UserFolloweds() map[string]interface{} {
 	} else {
 		data["time"] = service.Time
 	}
-	reBody, _ := util.CreateRequest("POST", `https://music.163.com/eapi/user/getfolloweds/`+service.Uid, data, options)
+	code, reBody, _ := util.CreateRequest("POST", `https://music.163.com/eapi/user/getfolloweds/`+service.Uid, data, options)
 
-	return reBody
+	return code, reBody
 }

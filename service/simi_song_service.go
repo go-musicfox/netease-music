@@ -10,7 +10,7 @@ type SimiSongService struct {
 	Offset string `json:"offset" form:"offset"`
 }
 
-func (service *SimiSongService) SimiSong() map[string]interface{} {
+func (service *SimiSongService) SimiSong() (float64, string) {
 
 	options := &util.Options{
 		Crypto:  "weapi",
@@ -27,7 +27,7 @@ func (service *SimiSongService) SimiSong() map[string]interface{} {
 	} else {
 		data["offset"] = service.Offset
 	}
-	reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/v1/discovery/simiSong`, data, options)
+	code, reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/v1/discovery/simiSong`, data, options)
 
-	return reBody
+	return code, reBody
 }

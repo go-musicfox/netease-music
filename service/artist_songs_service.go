@@ -1,8 +1,8 @@
 package service
 
 import (
-	"net/http"
 	"github.com/anhoder/netease-music/util"
+	"net/http"
 )
 
 type ArtistSongsService struct {
@@ -12,7 +12,7 @@ type ArtistSongsService struct {
 	Order  string `json:"order" form:"order"`
 }
 
-func (service *ArtistSongsService) ArtistSongs() map[string]interface{} {
+func (service *ArtistSongsService) ArtistSongs() (float64, string) {
 
 	cookiesOS := &http.Cookie{Name: "os", Value: "pc"}
 
@@ -39,7 +39,7 @@ func (service *ArtistSongsService) ArtistSongs() map[string]interface{} {
 	}
 	data["work_type"] = "1"
 	data["private_cloud"] = "true"
-	reBody, _ := util.CreateRequest("POST", `https://music.163.com/api/v1/artist/songs`, data, options)
+	code, reBody, _ := util.CreateRequest("POST", `https://music.163.com/api/v1/artist/songs`, data, options)
 
-	return reBody
+	return code, reBody
 }

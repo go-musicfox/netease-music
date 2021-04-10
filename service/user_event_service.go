@@ -10,7 +10,7 @@ type UserEventService struct {
 	Time  string `json:"lasttime " form:"lasttime "`
 }
 
-func (service *UserEventService) UserEvent() map[string]interface{} {
+func (service *UserEventService) UserEvent() (float64, string) {
 
 	options := &util.Options{
 		Crypto:  "weapi",
@@ -28,7 +28,7 @@ func (service *UserEventService) UserEvent() map[string]interface{} {
 	} else {
 		data["time"] = service.Time
 	}
-	reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/event/get/`+service.Uid, data, options)
+	code, reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/event/get/`+service.Uid, data, options)
 
-	return reBody
+	return code, reBody
 }

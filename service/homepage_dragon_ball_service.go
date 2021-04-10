@@ -7,14 +7,14 @@ import (
 type HomepageDragonBallService struct {
 }
 
-func (service *HomepageDragonBallService) HomepageDragonBall() map[string]interface{} {
+func (service *HomepageDragonBallService) HomepageDragonBall() (float64, string) {
 
 	options := &util.Options{
 		Crypto:  "eapi",
 		Url:     "/api/homepage/dragon/ball/static",
 	}
 	data := make(map[string]string)
-	reBody, _ := util.CreateRequest("POST", `https://music.163.com/eapi/homepage/dragon/ball/static`, data, options)
+	code, reBody, _ := util.CreateRequest("POST", `https://music.163.com/eapi/homepage/dragon/ball/static`, data, options)
 
-	return reBody
+	return code, reBody
 }

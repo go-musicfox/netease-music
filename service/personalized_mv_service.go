@@ -10,14 +10,14 @@ type PersonalizedMvService struct {
 	Offset string `json:"offset" form:"offset"`
 }
 
-func (service *PersonalizedMvService) PersonalizedMv() map[string]interface{} {
+func (service *PersonalizedMvService) PersonalizedMv() (float64, string) {
 
 	options := &util.Options{
 		Crypto:  "weapi",
 	}
 	data := make(map[string]string)
 
-	reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/personalized/mv`, data, options)
+	code, reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/personalized/mv`, data, options)
 
-	return reBody
+	return code, reBody
 }

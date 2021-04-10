@@ -11,7 +11,7 @@ type AlbumListService struct {
 	Type   string `json:"type" form:"type"`
 }
 
-func (service *AlbumListService) AlbumList() map[string]interface{} {
+func (service *AlbumListService) AlbumList() (float64, string) {
 
 	options := &util.Options{
 		Crypto:  "weapi",
@@ -34,7 +34,7 @@ func (service *AlbumListService) AlbumList() map[string]interface{} {
 	}
 	data["order"] = "true"
 	data["type"] = service.Type
-	reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/vipmall/albumproduct/list`, data, options)
+	code, reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/vipmall/albumproduct/list`, data, options)
 
-	return reBody
+	return code, reBody
 }

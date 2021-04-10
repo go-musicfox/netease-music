@@ -8,7 +8,7 @@ type ArtistTopSongService struct {
 	Id string `json:"id" form:"id"`
 }
 
-func (service *ArtistTopSongService) ArtistTopSong() map[string]interface{} {
+func (service *ArtistTopSongService) ArtistTopSong() (float64, string) {
 
 	options := &util.Options{
 		Crypto:  "weapi",
@@ -17,7 +17,7 @@ func (service *ArtistTopSongService) ArtistTopSong() map[string]interface{} {
 
 	data["id"] = service.Id
 
-	reBody, _ := util.CreateRequest("POST", `https://music.163.com/api/artist/top/song`, data, options)
+	code, reBody, _ := util.CreateRequest("POST", `https://music.163.com/api/artist/top/song`, data, options)
 
-	return reBody
+	return code, reBody
 }

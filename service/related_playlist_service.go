@@ -1,15 +1,16 @@
 package service
 
 import (
-	"regexp"
+	"encoding/json"
 	"github.com/anhoder/netease-music/util"
+	"regexp"
 )
 
 type RelatedPlaylistService struct {
 	ID string `json:"id" form:"id"`
 }
 
-func (service *RelatedPlaylistService) RelatedPlaylist() map[string]interface{} {
+func (service *RelatedPlaylistService) RelatedPlaylist() (float64, string) {
 
 	options := &util.Options{
 		Crypto:  "weapi",
@@ -17,10 +18,10 @@ func (service *RelatedPlaylistService) RelatedPlaylist() map[string]interface{} 
 	}
 	data := make(map[string]string)
 
-	reBody, _ := util.CreateRequest("GET", `https://music.163.com/playlist?id=`+service.ID, data, options)
+	code, reBody, _ := util.CreateRequest("GET", `https://music.163.com/playlist?id=`+service.ID, data, options)
 
 	reg := regexp.MustCompile("<div class=\"cver u-cover u-cover-3\">[\\s\\S]*?<img src=\"([^\"]+)\">[\\s\\S]*?<a class=\"sname f-fs1 s-fc0\" href=\"([^\"]+)\"[^>]*>([^<]+?)<\\/a>[\\s\\S]*?<a class=\"nm nm f-thide s-fc3\" href=\"([^\"]+)\"[^>]*>([^<]+?)<\\/a>")
-	results := reg.FindAllStringSubmatch(reBody["html"].(string), -1)
+	results := reg.FindAllStringSubmatch(reBody, -1)
 
 	type Creator struct {
 		UserId   string `json:"userId"`
@@ -44,7 +45,6 @@ func (service *RelatedPlaylistService) RelatedPlaylist() map[string]interface{} 
 		Results = append(Results, item)
 	}
 
-	delete(reBody, "html")
-	reBody["playlists"] = Results
-	return reBody
+	res, _ := json.Marshal(Results)
+	return code, string(res)
 }

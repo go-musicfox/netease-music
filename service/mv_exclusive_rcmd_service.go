@@ -9,7 +9,7 @@ type MvExclusiveRcmdService struct {
 	Offset string `json:"offset" form:"offset"`
 }
 
-func (service *MvExclusiveRcmdService) MvExclusiveRcmd() map[string]interface{} {
+func (service *MvExclusiveRcmdService) MvExclusiveRcmd() (float64, string) {
 
 	options := &util.Options{
 		Crypto:  "weapi",
@@ -26,7 +26,7 @@ func (service *MvExclusiveRcmdService) MvExclusiveRcmd() map[string]interface{} 
 		data["offset"] = service.Offset
 	}
 	data["order"] = "true"
-	reBody, _ := util.CreateRequest("POST", `https://interface.music.163.com/api/mv/exclusive/rcmd`, data, options)
+	code, reBody, _ := util.CreateRequest("POST", `https://interface.music.163.com/api/mv/exclusive/rcmd`, data, options)
 
-	return reBody
+	return code, reBody
 }

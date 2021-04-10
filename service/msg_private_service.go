@@ -10,7 +10,7 @@ type MsgPrivateService struct {
 	Offset string `json:"offset" form:"offset"`
 }
 
-func (service *MsgPrivateService) MsgPrivate() map[string]interface{} {
+func (service *MsgPrivateService) MsgPrivate() (float64, string) {
 
 	options := &util.Options{
 		Crypto:  "weapi",
@@ -27,7 +27,7 @@ func (service *MsgPrivateService) MsgPrivate() map[string]interface{} {
 		data["offset"] = service.Offset
 	}
 	data["order"] = "true"
-	reBody, _ := util.CreateRequest("POST", `https://music.163.com/api/msg/private/users`, data, options)
+	code, reBody, _ := util.CreateRequest("POST", `https://music.163.com/api/msg/private/users`, data, options)
 
-	return reBody
+	return code, reBody
 }

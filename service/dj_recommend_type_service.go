@@ -31,14 +31,14 @@ type DjRecommendTypeService struct {
 	CateId string `json:"type" form:"type"`
 }
 
-func (service *DjRecommendTypeService) DjRecommendType() map[string]interface{} {
+func (service *DjRecommendTypeService) DjRecommendType() (float64, string) {
 
 	options := &util.Options{
 		Crypto:  "weapi",
 	}
 	data := make(map[string]string)
 	data["cateId"] = service.CateId
-	reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/djradio/recommend`, data, options)
+	code, reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/djradio/recommend`, data, options)
 
-	return reBody
+	return code, reBody
 }

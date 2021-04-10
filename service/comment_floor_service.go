@@ -12,7 +12,7 @@ type CommentFloorService struct {
 	Time            string `json:"time" form:"time"`
 }
 
-func (service *CommentFloorService) CommentFloor() map[string]interface{} {
+func (service *CommentFloorService) CommentFloor() (float64, string) {
 
 	options := &util.Options{
 		Crypto:  "weapi",
@@ -38,7 +38,7 @@ func (service *CommentFloorService) CommentFloor() map[string]interface{} {
 	}
 	data["parentCommentId"] = service.ParentCommentId
 	data["threadId"] = Type[service.Type] + service.Id
-	reBody, _ := util.CreateRequest("POST", `https://music.163.com/api/resource/comment/floor/get`, data, options)
+	code, reBody, _ := util.CreateRequest("POST", `https://music.163.com/api/resource/comment/floor/get`, data, options)
 
-	return reBody
+	return code, reBody
 }

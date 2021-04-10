@@ -1,15 +1,15 @@
 package service
 
 import (
-	"net/http"
 	"github.com/anhoder/netease-music/util"
+	"net/http"
 )
 
 type VideoTimelineRecommendService struct {
 	Offset string `json:"offset" form:"offset"`
 }
 
-func (service *VideoTimelineRecommendService) VideoTimelineRecommend() map[string]interface{} {
+func (service *VideoTimelineRecommendService) VideoTimelineRecommend() (float64, string) {
 
 	cookiesOS := &http.Cookie{Name: "os", Value: "pc"}
 
@@ -27,7 +27,7 @@ func (service *VideoTimelineRecommendService) VideoTimelineRecommend() map[strin
 	data["withProgramInfo"] = "true"
 	data["needUrl"] = "1"
 	data["resolution"] = "480"
-	reBody, _ := util.CreateRequest("POST", `https://music.163.com/api/videotimeline/get`, data, options)
+	code, reBody, _ := util.CreateRequest("POST", `https://music.163.com/api/videotimeline/get`, data, options)
 
-	return reBody
+	return code, reBody
 }

@@ -11,7 +11,7 @@ type AlbumNewService struct {
 	Offset string `json:"offset" form:"offset"`
 }
 
-func (service *AlbumNewService) AlbumNew() map[string]interface{} {
+func (service *AlbumNewService) AlbumNew() (float64, string) {
 
 	cookiesOS := &http.Cookie{Name: "os", Value: "pc"}
 
@@ -35,7 +35,7 @@ func (service *AlbumNewService) AlbumNew() map[string]interface{} {
 	data["offset"] = service.Offset
 	data["total"] = "true"
 
-	reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/album/new`, data, options)
+	code, reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/album/new`, data, options)
 
-	return reBody
+	return code, reBody
 }

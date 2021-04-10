@@ -7,7 +7,7 @@ import (
 type SearchDefaultService struct {
 }
 
-func (service *SearchDefaultService) SearchDefault() map[string]interface{} {
+func (service *SearchDefaultService) SearchDefault() (float64, string) {
 
 	options := &util.Options{
 		Crypto:  "eapi",
@@ -15,7 +15,7 @@ func (service *SearchDefaultService) SearchDefault() map[string]interface{} {
 	}
 	data := make(map[string]string)
 
-	reBody, _ := util.CreateRequest("POST", `http://interface3.music.163.com/eapi/search/defaultkeyword/get`, data, options)
+	code, reBody, _ := util.CreateRequest("POST", `http://interface3.music.163.com/eapi/search/defaultkeyword/get`, data, options)
 
-	return reBody
+	return code, reBody
 }

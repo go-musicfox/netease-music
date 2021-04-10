@@ -9,7 +9,7 @@ type SearchSuggestService struct {
 	Type string `json:"type" form:"type"`
 }
 
-func (service *SearchSuggestService) SearchSuggest() map[string]interface{} {
+func (service *SearchSuggestService) SearchSuggest() (float64, string) {
 
 	options := &util.Options{
 		Crypto:  "weapi",
@@ -22,7 +22,7 @@ func (service *SearchSuggestService) SearchSuggest() map[string]interface{} {
 		service.Type = "web"
 	}
 	data["s"] = service.S
-	reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/search/suggest/`+service.Type, data, options)
+	code, reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/search/suggest/`+service.Type, data, options)
 
-	return reBody
+	return code, reBody
 }

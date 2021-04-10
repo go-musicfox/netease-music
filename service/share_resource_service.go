@@ -10,7 +10,7 @@ type ShareResourceService struct {
 	Type string `json:"type" form:"type"`
 }
 
-func (service *ShareResourceService) ShareResource() map[string]interface{} {
+func (service *ShareResourceService) ShareResource() (float64, string) {
 
 	options := &util.Options{
 		Crypto:  "weapi",
@@ -24,7 +24,7 @@ func (service *ShareResourceService) ShareResource() map[string]interface{} {
 	} else {
 		data["type"] = service.Type
 	}
-	reBody, _ := util.CreateRequest("POST", `http://music.163.com/weapi/share/friends/resource`, data, options)
+	code, reBody, _ := util.CreateRequest("POST", `http://music.163.com/weapi/share/friends/resource`, data, options)
 
-	return reBody
+	return code, reBody
 }

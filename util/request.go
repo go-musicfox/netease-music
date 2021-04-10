@@ -4,9 +4,8 @@ import (
 	"bytes"
 	"compress/zlib"
 	"encoding/hex"
-	"encoding/json"
-	"fmt"
 	"github.com/asmcos/requests"
+	"github.com/buger/jsonparser"
 	"io"
 	"math/rand"
 	"net/http"
@@ -60,7 +59,7 @@ func SetGlobalCookieJar(jar http.CookieJar) {
 	cookieJar = jar
 }
 
-func CreateRequest(method string, url string, data map[string]string, options *Options) (map[string]interface{}, []*http.Cookie) {
+func CreateRequest(method string, url string, data map[string]string, options *Options) (float64, string, []*http.Cookie) {
 	req := requests.Requests()
 	if cookieJar != nil {
 		req.Client.Jar = cookieJar
@@ -68,7 +67,6 @@ func CreateRequest(method string, url string, data map[string]string, options *O
 	req.Header.Set("User-Agent", chooseUserAgent(options.Ua))
 	csrfToken := ""
 	music_U := ""
-	answer := map[string]interface{}{}
 
 	if method == "POST" {
 		req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
@@ -141,9 +139,7 @@ func CreateRequest(method string, url string, data map[string]string, options *O
 	}
 
 	if err != nil {
-		answer["code"] = 520
-		answer["err"] = err.Error()
-		return answer, nil
+		return 520, err.Error(), nil
 	}
 	cookies := resp.Cookies()
 
@@ -158,23 +154,11 @@ func CreateRequest(method string, url string, data map[string]string, options *O
 		body = out.Bytes()
 	}
 
-	err = json.Unmarshal(body, &answer)
-	// 出错说明不是json
+	var code float64
+	code, err = jsonparser.GetFloat(body, "code")
 	if err != nil {
-		//fmt.Println(string(body))
-		// 可能是纯页面
-		if strings.Index(string(body), "<!DOCTYPE html>") != -1 {
-			answer["code"] = 200
-			answer["html"] = string(body)
-			return answer, cookies
-		}
-		answer["code"] = 500
-		answer["err"] = err.Error()
-		fmt.Println(string(body))
-		return answer, nil
+		code = 200
 	}
-	if _, ok := answer["code"]; !ok {
-		answer["code"] = 200
-	}
-	return answer, cookies
+
+	return code, string(body), cookies
 }

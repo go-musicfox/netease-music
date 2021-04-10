@@ -7,13 +7,13 @@ import (
 type DjCategoryExcludehotService struct {
 }
 
-func (service *DjCategoryExcludehotService) DjCategoryExcludehot() map[string]interface{} {
+func (service *DjCategoryExcludehotService) DjCategoryExcludehot() (float64, string) {
 
 	options := &util.Options{
 		Crypto:  "weapi",
 	}
 	data := make(map[string]string)
-	reBody, _ := util.CreateRequest("POST", `http://music.163.com/weapi/djradio/category/excludehot`, data, options)
+	code, reBody, _ := util.CreateRequest("POST", `http://music.163.com/weapi/djradio/category/excludehot`, data, options)
 
-	return reBody
+	return code, reBody
 }

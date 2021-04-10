@@ -1,14 +1,14 @@
 package service
 
 import (
-	"net/http"
 	"github.com/anhoder/netease-music/util"
+	"net/http"
 )
 
 type LoginRefreshService struct {
 }
 
-func (service *LoginRefreshService) LoginRefresh() map[string]interface{} {
+func (service *LoginRefreshService) LoginRefresh() (float64, string) {
 
 	cookiesOS := &http.Cookie{Name: "os", Value: "pc"}
 
@@ -18,7 +18,7 @@ func (service *LoginRefreshService) LoginRefresh() map[string]interface{} {
 		Cookies: []*http.Cookie{cookiesOS},
 	}
 	data := make(map[string]string)
-	reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/login/token/refresh`, data, options)
+	code, reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/login/token/refresh`, data, options)
 
-	return reBody
+	return code, reBody
 }

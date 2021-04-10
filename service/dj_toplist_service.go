@@ -10,7 +10,7 @@ type DjToplistService struct {
 	Offset string `json:"offset" form:"offset"`
 }
 
-func (service *DjToplistService) DjToplist() map[string]interface{} {
+func (service *DjToplistService) DjToplist() (float64, string) {
 
 	options := &util.Options{
 		Crypto:  "weapi",
@@ -31,7 +31,7 @@ func (service *DjToplistService) DjToplist() map[string]interface{} {
 	} else {
 		data["type"] = "0"
 	}
-	reBody, _ := util.CreateRequest("POST", `https://music.163.com/api/djradio/toplist`, data, options)
+	code, reBody, _ := util.CreateRequest("POST", `https://music.163.com/api/djradio/toplist`, data, options)
 
-	return reBody
+	return code, reBody
 }

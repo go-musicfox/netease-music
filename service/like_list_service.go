@@ -8,7 +8,7 @@ type LikeListService struct {
 	UID string `json:"uid" form:"uid"`
 }
 
-func (service *LikeListService) LikeList() map[string]interface{} {
+func (service *LikeListService) LikeList() (float64, string) {
 
 	options := &util.Options{
 		Crypto:  "weapi",
@@ -17,7 +17,7 @@ func (service *LikeListService) LikeList() map[string]interface{} {
 	data := make(map[string]string)
 	data["uid"] = service.UID
 
-	reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/song/like/get`, data, options)
+	code, reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/song/like/get`, data, options)
 
-	return reBody
+	return code, reBody
 }
