@@ -9,7 +9,7 @@ type PersonalizedPrivatecontentListService struct {
 	Offset string `json:"offset" form:"offset"`
 }
 
-func (service *PersonalizedPrivatecontentListService) PersonalizedPrivatecontentList() (float64, string) {
+func (service *PersonalizedPrivatecontentListService) PersonalizedPrivatecontentList() (float64, []byte) {
 
 	options := &util.Options{
 		Crypto:  "weapi",

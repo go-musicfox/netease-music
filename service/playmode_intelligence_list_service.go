@@ -11,7 +11,7 @@ type PlaymodeIntelligenceListService struct {
 	Count        string `json:"count" form:"count"`
 }
 
-func (service *PlaymodeIntelligenceListService) PlaymodeIntelligenceList() (float64, string) {
+func (service *PlaymodeIntelligenceListService) PlaymodeIntelligenceList() (float64, []byte) {
 
 	options := &util.Options{
 		Crypto:  "weapi",

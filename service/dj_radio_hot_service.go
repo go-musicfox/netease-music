@@ -10,7 +10,7 @@ type DjRadioHotService struct {
 	Offset string `json:"offset" form:"offset"`
 }
 
-func (service *DjRadioHotService) DjRadioHot() (float64, string) {
+func (service *DjRadioHotService) DjRadioHot() (float64, []byte) {
 
 	options := &util.Options{
 		Crypto:  "weapi",

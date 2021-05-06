@@ -10,7 +10,7 @@ type SimiMvService struct {
 	Offset string `json:"offset" form:"offset"`
 }
 
-func (service *SimiMvService) SimiMv() (float64, string) {
+func (service *SimiMvService) SimiMv() (float64, []byte) {
 
 	options := &util.Options{
 		Crypto:  "weapi",

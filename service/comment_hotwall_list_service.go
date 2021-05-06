@@ -7,7 +7,7 @@ import (
 type CommentHotwallListService struct {
 }
 
-func (service *CommentHotwallListService) CommentHotwallList() (float64, string) {
+func (service *CommentHotwallListService) CommentHotwallList() (float64, []byte) {
 
 	options := &util.Options{
 		Crypto:  "weapi",

@@ -9,7 +9,7 @@ type EventService struct {
 	LastTime string `json:"lasttime" form:"lasttime"`
 }
 
-func (service *EventService) Event() (float64, string) {
+func (service *EventService) Event() (float64, []byte) {
 
 	options := &util.Options{
 		Crypto:  "weapi",

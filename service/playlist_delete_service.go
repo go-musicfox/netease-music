@@ -9,7 +9,7 @@ type PlaylistDeleteService struct {
 	ID string `json:"id" form:"id"`
 }
 
-func (service *PlaylistDeleteService) PlaylistDelete() (float64, string) {
+func (service *PlaylistDeleteService) PlaylistDelete() (float64, []byte) {
 
 	cookiesOS := &http.Cookie{Name: "os", Value: "pc"}
 

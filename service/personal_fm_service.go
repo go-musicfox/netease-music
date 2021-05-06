@@ -7,7 +7,7 @@ import (
 type PersonalFmService struct {
 }
 
-func (service *PersonalFmService) PersonalFm() (float64, string) {
+func (service *PersonalFmService) PersonalFm() (float64, []byte) {
 
 	options := &util.Options{
 		Crypto:  "weapi",

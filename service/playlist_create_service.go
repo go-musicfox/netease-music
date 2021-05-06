@@ -10,7 +10,7 @@ type PlaylistCreateService struct {
 	Privacy string `json:"privacy" form:"privacy"`
 }
 
-func (service *PlaylistCreateService) PlaylistCreate() (float64, string) {
+func (service *PlaylistCreateService) PlaylistCreate() (float64, []byte) {
 
 	cookiesOS := &http.Cookie{Name: "os", Value: "pc"}
 

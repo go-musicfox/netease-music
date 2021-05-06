@@ -13,7 +13,7 @@ type CommentLikeService struct {
 	Type     string `json:"type" form:"type"`
 }
 
-func (service *CommentLikeService) CommentLike() (float64, string) {
+func (service *CommentLikeService) CommentLike() (float64, []byte) {
 
 	// 获得所有cookie
 	cookiesOS := &http.Cookie{Name: "os", Value: "pc"}

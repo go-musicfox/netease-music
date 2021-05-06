@@ -9,7 +9,7 @@ type DigitalAlbumPurchasedService struct {
 	Offset string `json:"offset" form:"offset"`
 }
 
-func (service *DigitalAlbumPurchasedService) DigitalAlbumPurchased() (float64, string) {
+func (service *DigitalAlbumPurchasedService) DigitalAlbumPurchased() (float64, []byte) {
 
 	options := &util.Options{
 		Crypto:  "weapi",

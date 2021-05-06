@@ -11,7 +11,7 @@ type TopMvService struct {
 	Offset string `json:"offset" form:"offset"`
 }
 
-func (service *TopMvService) TopMv() (float64, string) {
+func (service *TopMvService) TopMv() (float64, []byte) {
 
 	cookiesOS := &http.Cookie{Name: "os", Value: "pc"}
 

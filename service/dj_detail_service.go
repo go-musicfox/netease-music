@@ -8,7 +8,7 @@ type DjDetailService struct {
 	ID string `json:"rid" form:"rid"`
 }
 
-func (service *DjDetailService) DjDetail() (float64, string) {
+func (service *DjDetailService) DjDetail() (float64, []byte) {
 
 	options := &util.Options{
 		Crypto:  "weapi",

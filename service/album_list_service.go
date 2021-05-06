@@ -11,7 +11,7 @@ type AlbumListService struct {
 	Type   string `json:"type" form:"type"`
 }
 
-func (service *AlbumListService) AlbumList() (float64, string) {
+func (service *AlbumListService) AlbumList() (float64, []byte) {
 
 	options := &util.Options{
 		Crypto:  "weapi",

@@ -9,7 +9,7 @@ type PlaylistSubscribeService struct {
 	ID string `json:"id" form:"id"`
 }
 
-func (service *PlaylistSubscribeService) PlaylistSubscribe() (float64, string) {
+func (service *PlaylistSubscribeService) PlaylistSubscribe() (float64, []byte) {
 
 	options := &util.Options{
 		Crypto:  "weapi",

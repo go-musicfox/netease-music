@@ -10,7 +10,7 @@ type FollowService struct {
 	Id string `json:"id" form:"id"`
 }
 
-func (service *FollowService) Follow() (float64, string) {
+func (service *FollowService) Follow() (float64, []byte) {
 
 	cookiesOS := &http.Cookie{Name: "os", Value: "pc"}
 

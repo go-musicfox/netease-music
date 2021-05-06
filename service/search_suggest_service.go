@@ -9,7 +9,7 @@ type SearchSuggestService struct {
 	Type string `json:"type" form:"type"`
 }
 
-func (service *SearchSuggestService) SearchSuggest() (float64, string) {
+func (service *SearchSuggestService) SearchSuggest() (float64, []byte) {
 
 	options := &util.Options{
 		Crypto:  "weapi",

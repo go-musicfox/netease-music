@@ -9,7 +9,7 @@ type PlaylistDescUpdateService struct {
 	Desc string `json:"desc" form:"desc"`
 }
 
-func (service *PlaylistDescUpdateService) PlaylistDescUpdate() (float64, string) {
+func (service *PlaylistDescUpdateService) PlaylistDescUpdate() (float64, []byte) {
 
 	options := &util.Options{
 		Crypto:  "eapi",

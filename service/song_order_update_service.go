@@ -9,7 +9,7 @@ type SongOrderUpdateService struct {
 	Ids string `json:"ids" form:"ids"`
 }
 
-func (service *SongOrderUpdateService) SongOrderUpdate() (float64, string) {
+func (service *SongOrderUpdateService) SongOrderUpdate() (float64, []byte) {
 
 	options := &util.Options{
 		Crypto:  "weapi",

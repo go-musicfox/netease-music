@@ -9,7 +9,7 @@ type VideoUrlService struct {
 	Res string `json:"resolution" form:"resolution"`
 }
 
-func (service *VideoUrlService) VideoUrl() (float64, string) {
+func (service *VideoUrlService) VideoUrl() (float64, []byte) {
 
 	options := &util.Options{
 		Crypto:  "weapi",

@@ -9,7 +9,7 @@ type LikeService struct {
 	L  string `json:"like" form:"like"`
 }
 
-func (service *LikeService) Like() (float64, string) {
+func (service *LikeService) Like() (float64, []byte) {
 
 	options := &util.Options{
 		Crypto:  "weapi",

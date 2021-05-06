@@ -14,7 +14,7 @@ type RegisterCellphoneService struct {
 	Nickname string `json:"nickname" form:"nickname"`
 }
 
-func (service *RegisterCellphoneService) RegisterCellphone() (float64, string) {
+func (service *RegisterCellphoneService) RegisterCellphone() (float64, []byte) {
 
 	cookiesOS := &http.Cookie{Name: "os", Value: "pc"}
 

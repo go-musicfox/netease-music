@@ -9,7 +9,7 @@ type MsgNoticesService struct {
 	LastTime string `json:"lasttime" form:"lasttime"`
 }
 
-func (service *MsgNoticesService) MsgNotices() (float64, string) {
+func (service *MsgNoticesService) MsgNotices() (float64, []byte) {
 
 	options := &util.Options{
 		Crypto:  "weapi",

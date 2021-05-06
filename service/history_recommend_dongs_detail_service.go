@@ -9,7 +9,7 @@ type HistoryRecommendDongsDetailService struct {
 	Date string `json:"date" form:"date"`
 }
 
-func (service *HistoryRecommendDongsDetailService) HistoryRecommendDongsDetail() (float64, string) {
+func (service *HistoryRecommendDongsDetailService) HistoryRecommendDongsDetail() (float64, []byte) {
 
 	cookiesOS := &http.Cookie{Name: "os", Value: "ios"}
 

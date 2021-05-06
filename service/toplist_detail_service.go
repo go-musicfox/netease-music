@@ -7,7 +7,7 @@ import (
 type ToplistDetailService struct {
 }
 
-func (service *ToplistDetailService) ToplistDetail() (float64, string) {
+func (service *ToplistDetailService) ToplistDetail() (float64, []byte) {
 
 	options := &util.Options{
 		Crypto:  "weapi",

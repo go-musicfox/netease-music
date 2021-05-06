@@ -10,7 +10,7 @@ type CaptchaSentService struct {
 	Cellphone string `json:"phone" form:"phone"`
 }
 
-func (service *CaptchaSentService) CaptchaSent() (float64, string) {
+func (service *CaptchaSentService) CaptchaSent() (float64, []byte) {
 
 	cookiesOS := &http.Cookie{Name: "os", Value: "pc"}
 

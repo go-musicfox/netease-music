@@ -10,7 +10,7 @@ type ShareResourceService struct {
 	Type string `json:"type" form:"type"`
 }
 
-func (service *ShareResourceService) ShareResource() (float64, string) {
+func (service *ShareResourceService) ShareResource() (float64, []byte) {
 
 	options := &util.Options{
 		Crypto:  "weapi",

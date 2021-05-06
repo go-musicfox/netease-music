@@ -9,7 +9,7 @@ type TopArtistsService struct {
 	Offset string `json:"offset" form:"offset"`
 }
 
-func (service *TopArtistsService) TopArtists() (float64, string) {
+func (service *TopArtistsService) TopArtists() (float64, []byte) {
 
 	options := &util.Options{
 		Crypto:  "weapi",

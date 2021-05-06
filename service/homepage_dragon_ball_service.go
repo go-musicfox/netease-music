@@ -7,7 +7,7 @@ import (
 type HomepageDragonBallService struct {
 }
 
-func (service *HomepageDragonBallService) HomepageDragonBall() (float64, string) {
+func (service *HomepageDragonBallService) HomepageDragonBall() (float64, []byte) {
 
 	options := &util.Options{
 		Crypto:  "eapi",

@@ -7,7 +7,7 @@ import (
 type PersonalizedNewsongService struct {
 }
 
-func (service *PersonalizedNewsongService) PersonalizedNewsong() (float64, string) {
+func (service *PersonalizedNewsongService) PersonalizedNewsong() (float64, []byte) {
 
 	options := &util.Options{
 		Crypto:  "weapi",

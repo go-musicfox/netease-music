@@ -9,7 +9,7 @@ type DjPaygiftService struct {
 	Offset string `json:"offset" form:"offset"`
 }
 
-func (service *DjPaygiftService) DjPaygift() (float64, string) {
+func (service *DjPaygiftService) DjPaygift() (float64, []byte) {
 
 	options := &util.Options{
 		Crypto:  "weapi",

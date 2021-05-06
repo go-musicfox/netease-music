@@ -8,7 +8,7 @@ type ArtistsService struct {
 	ID string `json:"id" form:"id"`
 }
 
-func (service *ArtistsService) Artists() (float64, string) {
+func (service *ArtistsService) Artists() (float64, []byte) {
 
 	options := &util.Options{
 		Crypto:  "weapi",

@@ -9,7 +9,7 @@ type HotTopicService struct {
 	Offset string `json:"offset" form:"offset"`
 }
 
-func (service *HotTopicService) HotTopic() (float64, string) {
+func (service *HotTopicService) HotTopic() (float64, []byte) {
 
 	options := &util.Options{
 		Crypto:  "weapi",

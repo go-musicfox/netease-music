@@ -11,7 +11,7 @@ type AlbumNewService struct {
 	Offset string `json:"offset" form:"offset"`
 }
 
-func (service *AlbumNewService) AlbumNew() (float64, string) {
+func (service *AlbumNewService) AlbumNew() (float64, []byte) {
 
 	cookiesOS := &http.Cookie{Name: "os", Value: "pc"}
 

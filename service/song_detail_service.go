@@ -11,7 +11,7 @@ type SongDetailService struct {
 	Ids string `json:"ids" form:"ids"`
 }
 
-func (service *SongDetailService) SongDetail() (float64, string) {
+func (service *SongDetailService) SongDetail() (float64, []byte) {
 
 	cookiesOS := &http.Cookie{Name: "os", Value: "pc"}
 

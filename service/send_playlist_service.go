@@ -11,7 +11,7 @@ type SendPlaylistService struct {
 	UserIds string `json:"user_ids" form:"user_ids"`
 }
 
-func (service *SendPlaylistService) SendPlaylist() (float64, string) {
+func (service *SendPlaylistService) SendPlaylist() (float64, []byte) {
 
 	cookiesOS := &http.Cookie{Name: "os", Value: "pc"}
 

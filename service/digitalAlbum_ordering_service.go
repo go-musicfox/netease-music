@@ -11,7 +11,7 @@ type DigitalAlbumOrderingService struct {
 	Quantity      string `json:"quantity" form:"quantity"`
 }
 
-func (service *DigitalAlbumOrderingService) DigitalAlbumOrdering() (float64, string) {
+func (service *DigitalAlbumOrderingService) DigitalAlbumOrdering() (float64, []byte) {
 
 	options := &util.Options{
 		Crypto:  "weapi",

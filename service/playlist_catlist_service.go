@@ -6,7 +6,7 @@ import (
 
 type PlaylistCatlistService struct{}
 
-func (service *PlaylistCatlistService) PlaylistCatlist() (float64, string) {
+func (service *PlaylistCatlistService) PlaylistCatlist() (float64, []byte) {
 
 	options := &util.Options{
 		Crypto:  "weapi",

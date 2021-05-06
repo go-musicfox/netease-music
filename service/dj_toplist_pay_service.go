@@ -8,7 +8,7 @@ type DjToplistPayService struct {
 	Limit string `json:"limit" form:"limit"`
 }
 
-func (service *DjToplistPayService) DjToplistPay() (float64, string) {
+func (service *DjToplistPayService) DjToplistPay() (float64, []byte) {
 
 	options := &util.Options{
 		Crypto:  "weapi",

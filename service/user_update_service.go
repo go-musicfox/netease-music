@@ -14,7 +14,7 @@ type UserUpdateService struct {
 	Signature   string `json:"signature" form:"signature"`
 }
 
-func (service *UserUpdateService) UserUpdate() (float64, string) {
+func (service *UserUpdateService) UserUpdate() (float64, []byte) {
 
 	options := &util.Options{
 		Crypto:  "weapi",

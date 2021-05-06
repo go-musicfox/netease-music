@@ -9,7 +9,7 @@ type MvFirstService struct {
 	Limit string `json:"limit" form:"limit"`
 }
 
-func (service *MvFirstService) MvFirst() (float64, string) {
+func (service *MvFirstService) MvFirst() (float64, []byte) {
 
 	options := &util.Options{
 		Crypto:  "weapi",

@@ -31,7 +31,7 @@ type ArtistListService struct {
 	Initial string `json:"initial" form:"initial"`
 }
 
-func (service *ArtistListService) ArtistList() (float64, string) {
+func (service *ArtistListService) ArtistList() (float64, []byte) {
 
 	options := &util.Options{
 		Crypto:  "weapi",

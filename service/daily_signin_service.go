@@ -8,7 +8,7 @@ type DailySigninService struct {
 	Type string `json:"type" form:"type"`
 }
 
-func (service *DailySigninService) DailySignin() (float64, string) {
+func (service *DailySigninService) DailySignin() (float64, []byte) {
 
 	options := &util.Options{
 		Crypto:  "weapi",

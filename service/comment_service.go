@@ -14,7 +14,7 @@ type CommentService struct {
 	CommentId string `json:"commentId" form:"commentId"`
 }
 
-func (service *CommentService) Comment() (float64, string) {
+func (service *CommentService) Comment() (float64, []byte) {
 
 	cookiesOS := &http.Cookie{Name: "os", Value: "pc"}
 

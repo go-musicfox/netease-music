@@ -10,7 +10,7 @@ type PersonalizedMvService struct {
 	Offset string `json:"offset" form:"offset"`
 }
 
-func (service *PersonalizedMvService) PersonalizedMv() (float64, string) {
+func (service *PersonalizedMvService) PersonalizedMv() (float64, []byte) {
 
 	options := &util.Options{
 		Crypto:  "weapi",

@@ -8,7 +8,7 @@ type ActivateInitProfileService struct {
 	Nickname string `json:"nickname" form:"nickname"`
 }
 
-func (service *ActivateInitProfileService) ActivateInitProfile() (float64, string) {
+func (service *ActivateInitProfileService) ActivateInitProfile() (float64, []byte) {
 
 	options := &util.Options{
 		Crypto:  "eapi",

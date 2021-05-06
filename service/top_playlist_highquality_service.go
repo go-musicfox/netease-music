@@ -10,7 +10,7 @@ type TopPlaylistHighqualityService struct {
 	LastTime string `json:"lasttime" form:"lasttime"`
 }
 
-func (service *TopPlaylistHighqualityService) TopPlaylistHighquality() (float64, string) {
+func (service *TopPlaylistHighqualityService) TopPlaylistHighquality() (float64, []byte) {
 
 	options := &util.Options{
 		Crypto:  "weapi",

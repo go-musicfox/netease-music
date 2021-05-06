@@ -9,7 +9,7 @@ type VideoSubService struct {
 	Id string `json:"id" form:"id"`
 }
 
-func (service *VideoSubService) VideoSub() (float64, string) {
+func (service *VideoSubService) VideoSub() (float64, []byte) {
 
 	options := &util.Options{
 		Crypto:  "weapi",

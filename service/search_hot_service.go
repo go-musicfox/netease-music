@@ -7,7 +7,7 @@ import (
 type SearchHotService struct {
 }
 
-func (service *SearchHotService) SearchHot() (float64, string) {
+func (service *SearchHotService) SearchHot() (float64, []byte) {
 
 	options := &util.Options{
 		Crypto:  "weapi",

@@ -9,7 +9,7 @@ type CellphoneExistenceCheckService struct {
 	Countrycode string `json:"countrycode" form:"countrycode"`
 }
 
-func (service *CellphoneExistenceCheckService) CellphoneExistenceCheck() (float64, string) {
+func (service *CellphoneExistenceCheckService) CellphoneExistenceCheck() (float64, []byte) {
 
 	options := &util.Options{
 		Crypto:  "eapi",

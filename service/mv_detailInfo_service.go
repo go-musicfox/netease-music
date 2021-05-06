@@ -8,7 +8,7 @@ type MvDetailInfoService struct {
 	ID string `json:"mvid" form:"mvid"`
 }
 
-func (service *MvDetailInfoService) MvDetailInfo() (float64, string) {
+func (service *MvDetailInfoService) MvDetailInfo() (float64, []byte) {
 
 	options := &util.Options{
 		Crypto:  "weapi",

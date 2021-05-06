@@ -8,7 +8,7 @@ type TopSongService struct {
 	AreaId string `json:"type" form:"type"`
 }
 
-func (service *TopSongService) TopSong() (float64, string) {
+func (service *TopSongService) TopSong() (float64, []byte) {
 
 	options := &util.Options{
 		Crypto:  "weapi",

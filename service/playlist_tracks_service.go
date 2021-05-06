@@ -10,7 +10,7 @@ type PlaylistTracksService struct {
 	TrackIds string `json:"tracks" form:"tracks"`
 }
 
-func (service *PlaylistTracksService) PlaylistTracks() (float64, string) {
+func (service *PlaylistTracksService) PlaylistTracks() (float64, []byte) {
 
 	options := &util.Options{
 		Crypto:  "weapi",

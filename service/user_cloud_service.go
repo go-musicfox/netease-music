@@ -10,7 +10,7 @@ type UserCloudService struct {
 	Offset string `json:"offset" form:"offset"`
 }
 
-func (service *UserCloudService) UserCloud() (float64, string) {
+func (service *UserCloudService) UserCloud() (float64, []byte) {
 
 	cookiesOS := &http.Cookie{Name: "os", Value: "pc"}
 

@@ -10,7 +10,7 @@ type UserFollowsService struct {
 	Offset string `json:"offset" form:"offset"`
 }
 
-func (service *UserFollowsService) UserFollows() (float64, string) {
+func (service *UserFollowsService) UserFollows() (float64, []byte) {
 
 	options := &util.Options{
 		Crypto:  "weapi",

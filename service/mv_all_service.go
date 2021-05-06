@@ -13,7 +13,7 @@ type MvAllService struct {
 	Order  string `json:"order" form:"order"`
 }
 
-func (service *MvAllService) MvAll() (float64, string) {
+func (service *MvAllService) MvAll() (float64, []byte) {
 
 	options := &util.Options{
 		Crypto:  "weapi",

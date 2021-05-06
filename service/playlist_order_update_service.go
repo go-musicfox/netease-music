@@ -9,7 +9,7 @@ type PlaylistOrderUpdateService struct {
 	Ids string `json:"ids" form:"ids"`
 }
 
-func (service *PlaylistOrderUpdateService) PlaylistOrderUpdate() (float64, string) {
+func (service *PlaylistOrderUpdateService) PlaylistOrderUpdate() (float64, []byte) {
 
 	cookiesOS := &http.Cookie{Name: "os", Value: "pc"}
 

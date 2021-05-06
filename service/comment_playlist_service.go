@@ -12,7 +12,7 @@ type CommentPlaylistService struct {
 	Before string `json:"before" form:"before"`
 }
 
-func (service *CommentPlaylistService) CommentPlaylist() (float64, string) {
+func (service *CommentPlaylistService) CommentPlaylist() (float64, []byte) {
 
 	cookiesOS := &http.Cookie{Name: "os", Value: "pc"}
 

@@ -11,7 +11,7 @@ type ToplistArtistService struct {
 	Offset string `json:"offset" form:"offset"`
 }
 
-func (service *ToplistArtistService) ToplistArtist() (float64, string) {
+func (service *ToplistArtistService) ToplistArtist() (float64, []byte) {
 
 	cookiesOS := &http.Cookie{Name: "os", Value: "pc"}
 

@@ -9,7 +9,7 @@ type MvSubService struct {
 	MvId string `json:"mvid" form:"mvid"`
 }
 
-func (service *MvSubService) MvSub() (float64, string) {
+func (service *MvSubService) MvSub() (float64, []byte) {
 
 	options := &util.Options{
 		Crypto:  "weapi",

@@ -10,7 +10,7 @@ type UserPlaylistService struct {
 	Offset string `json:"offset" form:"offset"`
 }
 
-func (service *UserPlaylistService) UserPlaylist() (float64, string) {
+func (service *UserPlaylistService) UserPlaylist() (float64, []byte) {
 
 	options := &util.Options{
 		Crypto:  "weapi",

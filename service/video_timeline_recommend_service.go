@@ -9,7 +9,7 @@ type VideoTimelineRecommendService struct {
 	Offset string `json:"offset" form:"offset"`
 }
 
-func (service *VideoTimelineRecommendService) VideoTimelineRecommend() (float64, string) {
+func (service *VideoTimelineRecommendService) VideoTimelineRecommend() (float64, []byte) {
 
 	cookiesOS := &http.Cookie{Name: "os", Value: "pc"}
 

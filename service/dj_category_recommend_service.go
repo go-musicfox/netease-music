@@ -7,7 +7,7 @@ import (
 type DjCategoryRecommendService struct {
 }
 
-func (service *DjCategoryRecommendService) DjCategoryRecommend() (float64, string) {
+func (service *DjCategoryRecommendService) DjCategoryRecommend() (float64, []byte) {
 
 	options := &util.Options{
 		Crypto:  "weapi",

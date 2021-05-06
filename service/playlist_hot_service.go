@@ -6,7 +6,7 @@ import (
 
 type PlaylistHotService struct{}
 
-func (service *PlaylistHotService) PlaylistHot() (float64, string) {
+func (service *PlaylistHotService) PlaylistHot() (float64, []byte) {
 
 	options := &util.Options{
 		Crypto:  "weapi",

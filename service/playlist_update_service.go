@@ -12,7 +12,7 @@ type PlaylistUpdateService struct {
 	Tags string `json:"tags" form:"tags"`
 }
 
-func (service *PlaylistUpdateService) PlaylistUpdate() (float64, string) {
+func (service *PlaylistUpdateService) PlaylistUpdate() (float64, []byte) {
 
 	cookiesOS := &http.Cookie{Name: "os", Value: "pc"}
 

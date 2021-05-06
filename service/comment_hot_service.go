@@ -13,7 +13,7 @@ type CommentHotService struct {
 	Type   string `json:"type" form:"type"`
 }
 
-func (service *CommentHotService) CommentHot() (float64, string) {
+func (service *CommentHotService) CommentHot() (float64, []byte) {
 
 	cookiesOS := &http.Cookie{Name: "os", Value: "pc"}
 

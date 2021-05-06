@@ -12,7 +12,7 @@ type CommentMvService struct {
 	Before string `json:"before" form:"before"`
 }
 
-func (service *CommentMvService) CommentMv() (float64, string) {
+func (service *CommentMvService) CommentMv() (float64, []byte) {
 
 	cookiesOS := &http.Cookie{Name: "os", Value: "pc"}
 

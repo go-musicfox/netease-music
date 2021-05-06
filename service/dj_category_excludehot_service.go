@@ -7,7 +7,7 @@ import (
 type DjCategoryExcludehotService struct {
 }
 
-func (service *DjCategoryExcludehotService) DjCategoryExcludehot() (float64, string) {
+func (service *DjCategoryExcludehotService) DjCategoryExcludehot() (float64, []byte) {
 
 	options := &util.Options{
 		Crypto:  "weapi",

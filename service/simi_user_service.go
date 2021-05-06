@@ -10,7 +10,7 @@ type SimiUserService struct {
 	Offset string `json:"offset" form:"offset"`
 }
 
-func (service *SimiUserService) SimiUser() (float64, string) {
+func (service *SimiUserService) SimiUser() (float64, []byte) {
 
 	options := &util.Options{
 		Crypto:  "weapi",

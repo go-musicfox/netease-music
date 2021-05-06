@@ -9,7 +9,7 @@ type EventDelService struct {
 	EvId string `json:"evId" form:"evId"`
 }
 
-func (service *EventDelService) EventDel() (float64, string) {
+func (service *EventDelService) EventDel() (float64, []byte) {
 
 	cookiesOS := &http.Cookie{Name: "os", Value: "pc"}
 

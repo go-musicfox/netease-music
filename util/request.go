@@ -59,7 +59,7 @@ func SetGlobalCookieJar(jar http.CookieJar) {
 	cookieJar = jar
 }
 
-func CreateRequest(method string, url string, data map[string]string, options *Options) (float64, string, []*http.Cookie) {
+func CreateRequest(method string, url string, data map[string]string, options *Options) (float64, []byte, []*http.Cookie) {
 	req := requests.Requests()
 	if cookieJar != nil {
 		req.Client.Jar = cookieJar
@@ -139,7 +139,7 @@ func CreateRequest(method string, url string, data map[string]string, options *O
 	}
 
 	if err != nil {
-		return 520, err.Error(), nil
+		return 520, []byte(err.Error()), nil
 	}
 	cookies := resp.Cookies()
 
@@ -160,5 +160,5 @@ func CreateRequest(method string, url string, data map[string]string, options *O
 		code = 200
 	}
 
-	return code, string(body), cookies
+	return code, body, cookies
 }

@@ -11,7 +11,7 @@ type RebindService struct {
 	Ctcode     string `json:"ctcode" form:"ctcode"`
 }
 
-func (service *RebindService) Rebind() (float64, string) {
+func (service *RebindService) Rebind() (float64, []byte) {
 
 	options := &util.Options{
 		Crypto:  "weapi",

@@ -12,7 +12,7 @@ type AlbumSongsaleboardService struct {
 	Year      string `json:"year" form:"year"`
 }
 
-func (service *AlbumSongsaleboardService) AlbumSongsaleboard() (float64, string) {
+func (service *AlbumSongsaleboardService) AlbumSongsaleboard() (float64, []byte) {
 
 	options := &util.Options{
 		Crypto:  "weapi",

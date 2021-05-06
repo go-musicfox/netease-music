@@ -8,7 +8,7 @@ type AlbumDetailDynamicService struct {
 	ID string `json:"id" form:"id"`
 }
 
-func (service *AlbumDetailDynamicService) AlbumDetailDynamic() (float64, string) {
+func (service *AlbumDetailDynamicService) AlbumDetailDynamic() (float64, []byte) {
 
 	options := &util.Options{
 		Crypto:  "weapi",

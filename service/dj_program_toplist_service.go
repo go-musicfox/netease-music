@@ -9,7 +9,7 @@ type DjProgramToplistService struct {
 	Offset string `json:"offset" form:"offset"`
 }
 
-func (service *DjProgramToplistService) DjProgramToplist() (float64, string) {
+func (service *DjProgramToplistService) DjProgramToplist() (float64, []byte) {
 
 	options := &util.Options{
 		Crypto:  "weapi",

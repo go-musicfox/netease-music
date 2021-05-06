@@ -7,7 +7,7 @@ import (
 type PersonalizedPrivatecontentService struct {
 }
 
-func (service *PersonalizedPrivatecontentService) PersonalizedPrivatecontent() (float64, string) {
+func (service *PersonalizedPrivatecontentService) PersonalizedPrivatecontent() (float64, []byte) {
 
 	options := &util.Options{
 		Crypto:  "weapi",

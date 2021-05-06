@@ -9,7 +9,7 @@ type PlaylistTagsUpdateService struct {
 	Tags string `json:"tags" form:"tags"`
 }
 
-func (service *PlaylistTagsUpdateService) PlaylistTagsUpdate() (float64, string) {
+func (service *PlaylistTagsUpdateService) PlaylistTagsUpdate() (float64, []byte) {
 
 	options := &util.Options{
 		Crypto:  "eapi",

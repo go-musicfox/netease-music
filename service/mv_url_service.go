@@ -10,7 +10,7 @@ type MvUrlService struct {
 	R  string `json:"r" form:"r"`
 }
 
-func (service *MvUrlService) MvUrl() (float64, string) {
+func (service *MvUrlService) MvUrl() (float64, []byte) {
 
 	cookiesOS := &http.Cookie{Name: "os", Value: "pc"}
 

@@ -11,7 +11,7 @@ type SimiPlaylistService struct {
 	Offset string `json:"offset" form:"offset"`
 }
 
-func (service *SimiPlaylistService) SimiPlaylist() (float64, string) {
+func (service *SimiPlaylistService) SimiPlaylist() (float64, []byte) {
 
 	cookiesOS := &http.Cookie{Name: "os", Value: "pc"}
 

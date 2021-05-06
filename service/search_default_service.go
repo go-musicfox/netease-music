@@ -7,7 +7,7 @@ import (
 type SearchDefaultService struct {
 }
 
-func (service *SearchDefaultService) SearchDefault() (float64, string) {
+func (service *SearchDefaultService) SearchDefault() (float64, []byte) {
 
 	options := &util.Options{
 		Crypto:  "eapi",

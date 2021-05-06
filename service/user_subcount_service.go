@@ -7,7 +7,7 @@ import (
 type UserSubcountService struct {
 }
 
-func (service *UserSubcountService) UserSubcount() (float64, string) {
+func (service *UserSubcountService) UserSubcount() (float64, []byte) {
 
 	options := &util.Options{
 		Crypto:  "weapi",

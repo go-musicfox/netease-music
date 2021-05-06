@@ -9,7 +9,7 @@ type MvExclusiveRcmdService struct {
 	Offset string `json:"offset" form:"offset"`
 }
 
-func (service *MvExclusiveRcmdService) MvExclusiveRcmd() (float64, string) {
+func (service *MvExclusiveRcmdService) MvExclusiveRcmd() (float64, []byte) {
 
 	options := &util.Options{
 		Crypto:  "weapi",

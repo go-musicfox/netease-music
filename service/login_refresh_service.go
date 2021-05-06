@@ -8,7 +8,7 @@ import (
 type LoginRefreshService struct {
 }
 
-func (service *LoginRefreshService) LoginRefresh() (float64, string) {
+func (service *LoginRefreshService) LoginRefresh() (float64, []byte) {
 
 	cookiesOS := &http.Cookie{Name: "os", Value: "pc"}
 

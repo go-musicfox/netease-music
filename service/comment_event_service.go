@@ -11,7 +11,7 @@ type CommentEventService struct {
 	BeforeTime string `json:"beforeTime" form:"beforeTime"`
 }
 
-func (service *CommentEventService) CommentEvent() (float64, string) {
+func (service *CommentEventService) CommentEvent() (float64, []byte) {
 
 	options := &util.Options{
 		Crypto:  "weapi",

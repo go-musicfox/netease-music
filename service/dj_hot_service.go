@@ -9,7 +9,7 @@ type DjHotService struct {
 	Offset string `json:"offset" form:"offset"`
 }
 
-func (service *DjHotService) DjHot() (float64, string) {
+func (service *DjHotService) DjHot() (float64, []byte) {
 
 	options := &util.Options{
 		Crypto:  "weapi",

@@ -10,7 +10,7 @@ type ProgramRecommendService struct {
 	Offset string `json:"offset" form:"offset"`
 }
 
-func (service *ProgramRecommendService) ProgramRecommend() (float64, string) {
+func (service *ProgramRecommendService) ProgramRecommend() (float64, []byte) {
 
 	options := &util.Options{
 		Crypto:  "weapi",

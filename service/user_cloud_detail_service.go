@@ -8,7 +8,7 @@ type UserCloudDetailService struct {
 	ID string `json:"id" form:"id"`
 }
 
-func (service *UserCloudDetailService) UserCloudDetail() (float64, string) {
+func (service *UserCloudDetailService) UserCloudDetail() (float64, []byte) {
 
 	options := &util.Options{
 		Crypto:  "weapi",

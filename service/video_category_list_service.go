@@ -9,7 +9,7 @@ type VideoCategoryListService struct {
 	Offset string `json:"offset" form:"offset"`
 }
 
-func (service *VideoCategoryListService) VideoCategoryList() (float64, string) {
+func (service *VideoCategoryListService) VideoCategoryList() (float64, []byte) {
 
 	options := &util.Options{
 		Crypto:  "weapi",

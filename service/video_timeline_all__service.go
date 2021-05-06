@@ -8,7 +8,7 @@ type VideoTimelineAllService struct {
 	Offset string `json:"offset" form:"offset"`
 }
 
-func (service *VideoTimelineAllService) VideoTimelineAll() (float64, string) {
+func (service *VideoTimelineAllService) VideoTimelineAll() (float64, []byte) {
 
 	options := &util.Options{
 		Crypto:  "weapi",

@@ -10,7 +10,7 @@ type ArtistMvService struct {
 	Offset string `json:"offset" form:"offset"`
 }
 
-func (service *ArtistMvService) ArtistMv() (float64, string) {
+func (service *ArtistMvService) ArtistMv() (float64, []byte) {
 
 	options := &util.Options{
 		Crypto:  "weapi",

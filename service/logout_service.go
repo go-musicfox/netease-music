@@ -7,7 +7,7 @@ import (
 type LogoutService struct {
 }
 
-func (service *LogoutService) Logout() (float64, string) {
+func (service *LogoutService) Logout() (float64, []byte) {
 
 	options := &util.Options{
 		Crypto:  "weapi",

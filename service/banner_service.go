@@ -8,7 +8,7 @@ type BannerService struct {
 	Type string `json:"type" form:"type"`
 }
 
-func (service *BannerService) Banner() (float64, string) {
+func (service *BannerService) Banner() (float64, []byte) {
 
 	options := &util.Options{
 		Crypto:  "linuxapi",

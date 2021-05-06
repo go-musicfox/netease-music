@@ -11,7 +11,7 @@ type TopPlaylistService struct {
 	Offset string `json:"offset" form:"offset"`
 }
 
-func (service *TopPlaylistService) TopPlaylist() (float64, string) {
+func (service *TopPlaylistService) TopPlaylist() (float64, []byte) {
 
 	options := &util.Options{
 		Crypto:  "weapi",

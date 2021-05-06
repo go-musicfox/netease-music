@@ -10,7 +10,7 @@ type MsgPrivateService struct {
 	Offset string `json:"offset" form:"offset"`
 }
 
-func (service *MsgPrivateService) MsgPrivate() (float64, string) {
+func (service *MsgPrivateService) MsgPrivate() (float64, []byte) {
 
 	options := &util.Options{
 		Crypto:  "weapi",

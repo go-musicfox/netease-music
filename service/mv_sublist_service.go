@@ -9,7 +9,7 @@ type MvSublistService struct {
 	Offset string `json:"offset" form:"offset"`
 }
 
-func (service *MvSublistService) MvSublist() (float64, string) {
+func (service *MvSublistService) MvSublist() (float64, []byte) {
 
 	options := &util.Options{
 		Crypto:  "weapi",

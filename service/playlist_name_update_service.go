@@ -9,7 +9,7 @@ type PlaylistNameUpdateService struct {
 	Name string `json:"desc" form:"name"`
 }
 
-func (service *PlaylistNameUpdateService) PlaylistNameUpdate() (float64, string) {
+func (service *PlaylistNameUpdateService) PlaylistNameUpdate() (float64, []byte) {
 
 	options := &util.Options{
 		Crypto:  "eapi",

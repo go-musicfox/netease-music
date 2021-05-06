@@ -8,7 +8,7 @@ type RelatedAllVideoService struct {
 	ID string `json:"id" form:"id"`
 }
 
-func (service *RelatedAllVideoService) RelatedAllVideo() (float64, string) {
+func (service *RelatedAllVideoService) RelatedAllVideo() (float64, []byte) {
 
 	options := &util.Options{
 		Crypto:  "weapi",

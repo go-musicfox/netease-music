@@ -9,7 +9,7 @@ type PlaylistDetailService struct {
 	S  string `json:"s" form:"s"`
 }
 
-func (service *PlaylistDetailService) PlaylistDetail() (float64, string) {
+func (service *PlaylistDetailService) PlaylistDetail() (float64, []byte) {
 
 	options := &util.Options{
 		Crypto:  "linuxapi",

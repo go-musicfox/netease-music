@@ -7,7 +7,7 @@ import (
 type CountriesCodeListService struct {
 }
 
-func (service *CountriesCodeListService) CountriesCodeList() (float64, string) {
+func (service *CountriesCodeListService) CountriesCodeList() (float64, []byte) {
 
 	options := &util.Options{
 		Crypto:  "eapi",

@@ -10,7 +10,7 @@ type PersonalizedDjprogramService struct {
 	Offset string `json:"offset" form:"offset"`
 }
 
-func (service *PersonalizedDjprogramService) PersonalizedDjprogram() (float64, string) {
+func (service *PersonalizedDjprogramService) PersonalizedDjprogram() (float64, []byte) {
 
 	options := &util.Options{
 		Crypto:  "weapi",

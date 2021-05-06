@@ -11,7 +11,7 @@ type ScrobbleService struct {
 	Time     string `json:"time" form:"time"`
 }
 
-func (service *ScrobbleService) Scrobble() (float64, string) {
+func (service *ScrobbleService) Scrobble() (float64, []byte) {
 
 	//errBody:=make(map[string]interface{})
 	//errBody["code"]=500
@@ -40,7 +40,7 @@ func (service *ScrobbleService) Scrobble() (float64, string) {
 	longs = append(longs, long)
 
 	if str, err := json.Marshal(longs); err != nil {
-		return 502, "参数错误"
+		return 502, []byte("参数错误")
 	} else {
 		data["long"] = string(str)
 	}

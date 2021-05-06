@@ -10,7 +10,7 @@ type SongUrlService struct {
 	Br string `json:"br" form:"br"`
 }
 
-func (service *SongUrlService) SongUrl() (float64, string) {
+func (service *SongUrlService) SongUrl() (float64, []byte) {
 
 	cookiesOS := &http.Cookie{Name: "os", Value: "pc"}
 

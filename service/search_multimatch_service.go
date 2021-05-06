@@ -9,7 +9,7 @@ type SearchMultimatchService struct {
 	S    string `json:"keywords" form:"keywords"`
 }
 
-func (service *SearchMultimatchService) SearchMultimatch() (float64, string) {
+func (service *SearchMultimatchService) SearchMultimatch() (float64, []byte) {
 
 	options := &util.Options{
 		Crypto:  "weapi",

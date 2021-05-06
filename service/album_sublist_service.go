@@ -9,7 +9,7 @@ type AlbumSublistService struct {
 	Offset string `json:"offset" form:"offset"`
 }
 
-func (service *AlbumSublistService) AlbumSublist() (float64, string) {
+func (service *AlbumSublistService) AlbumSublist() (float64, []byte) {
 
 	options := &util.Options{
 		Crypto:  "weapi",

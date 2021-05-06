@@ -7,7 +7,7 @@ import (
 type RecommendResourceService struct {
 }
 
-func (service *RecommendResourceService) RecommendResource() (float64, string) {
+func (service *RecommendResourceService) RecommendResource() (float64, []byte) {
 
 	options := &util.Options{
 		Crypto:  "weapi",

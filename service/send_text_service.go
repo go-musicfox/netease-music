@@ -11,7 +11,7 @@ type SendTextService struct {
 	UserIds string `json:"user_ids" form:"user_ids"`
 }
 
-func (service *SendTextService) SendText() (float64, string) {
+func (service *SendTextService) SendText() (float64, []byte) {
 
 	cookiesOS := &http.Cookie{Name: "os", Value: "pc"}
 

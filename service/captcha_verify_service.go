@@ -11,7 +11,7 @@ type CaptchaVerifyService struct {
 	Captcha   string `json:"captcha" form:"captcha"`
 }
 
-func (service *CaptchaVerifyService) CaptchaVerify() (float64, string) {
+func (service *CaptchaVerifyService) CaptchaVerify() (float64, []byte) {
 
 	cookiesOS := &http.Cookie{Name: "os", Value: "pc"}
 

@@ -12,7 +12,7 @@ type ResourceLikeService struct {
 	Type     string `json:"type" form:"type"`
 }
 
-func (service *ResourceLikeService) ResourceLike() (float64, string) {
+func (service *ResourceLikeService) ResourceLike() (float64, []byte) {
 
 	cookiesOS := &http.Cookie{Name: "os", Value: "pc"}
 

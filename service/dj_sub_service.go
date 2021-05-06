@@ -9,7 +9,7 @@ type DjSubService struct {
 	T   string `json:"t" form:"t"`
 }
 
-func (service *DjSubService) DjSub() (float64, string) {
+func (service *DjSubService) DjSub() (float64, []byte) {
 
 	options := &util.Options{
 		Crypto:  "weapi",

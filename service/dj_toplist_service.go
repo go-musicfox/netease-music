@@ -10,7 +10,7 @@ type DjToplistService struct {
 	Offset string `json:"offset" form:"offset"`
 }
 
-func (service *DjToplistService) DjToplist() (float64, string) {
+func (service *DjToplistService) DjToplist() (float64, []byte) {
 
 	options := &util.Options{
 		Crypto:  "weapi",

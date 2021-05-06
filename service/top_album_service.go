@@ -16,7 +16,7 @@ type TopAlbumService struct {
 	Month  string `json:"month" form:"month"`
 }
 
-func (service *TopAlbumService) TopAlbum() (float64, string) {
+func (service *TopAlbumService) TopAlbum() (float64, []byte) {
 
 	cookiesOS := &http.Cookie{Name: "os", Value: "pc"}
 

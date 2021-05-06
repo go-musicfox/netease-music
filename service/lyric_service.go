@@ -9,7 +9,7 @@ type LyricService struct {
 	ID string `json:"id" form:"id"`
 }
 
-func (service *LyricService) Lyric() (float64, string) {
+func (service *LyricService) Lyric() (float64, []byte) {
 
 	cookiesOS := &http.Cookie{Name: "os", Value: "pc"}
 

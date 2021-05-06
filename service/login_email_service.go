@@ -13,7 +13,7 @@ type LoginEmailService struct {
 	Md5password string `json:"md5_password" form:"md5_password"`
 }
 
-func (service *LoginEmailService) LoginEmail() (float64, string) {
+func (service *LoginEmailService) LoginEmail() (float64, []byte) {
 
 	cookiesOS := &http.Cookie{Name: "os", Value: "pc"}
 

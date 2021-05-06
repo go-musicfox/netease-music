@@ -12,7 +12,7 @@ type ArtistSongsService struct {
 	Order  string `json:"order" form:"order"`
 }
 
-func (service *ArtistSongsService) ArtistSongs() (float64, string) {
+func (service *ArtistSongsService) ArtistSongs() (float64, []byte) {
 
 	cookiesOS := &http.Cookie{Name: "os", Value: "pc"}
 

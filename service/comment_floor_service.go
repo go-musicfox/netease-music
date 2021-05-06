@@ -12,7 +12,7 @@ type CommentFloorService struct {
 	Time            string `json:"time" form:"time"`
 }
 
-func (service *CommentFloorService) CommentFloor() (float64, string) {
+func (service *CommentFloorService) CommentFloor() (float64, []byte) {
 
 	options := &util.Options{
 		Crypto:  "weapi",

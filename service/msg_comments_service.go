@@ -10,7 +10,7 @@ type MsgCommentsService struct {
 	BeforeTime string `json:"before" form:"before"`
 }
 
-func (service *MsgCommentsService) MsgComments() (float64, string) {
+func (service *MsgCommentsService) MsgComments() (float64, []byte) {
 
 	options := &util.Options{
 		Crypto:  "weapi",

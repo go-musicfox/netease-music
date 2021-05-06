@@ -11,7 +11,7 @@ type MsgPrivateHistoryService struct {
 	Time  string `json:"before" form:"before"`
 }
 
-func (service *MsgPrivateHistoryService) MsgPrivateHistory() (float64, string) {
+func (service *MsgPrivateHistoryService) MsgPrivateHistory() (float64, []byte) {
 
 	cookiesOS := &http.Cookie{Name: "os", Value: "pc"}
 

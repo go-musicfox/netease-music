@@ -8,7 +8,7 @@ type FmTrashService struct {
 	SongID string `json:"id" form:"id"`
 }
 
-func (service *FmTrashService) FmTrash() (float64, string) {
+func (service *FmTrashService) FmTrash() (float64, []byte) {
 
 	options := &util.Options{
 		Crypto:  "weapi",

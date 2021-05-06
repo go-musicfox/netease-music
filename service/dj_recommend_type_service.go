@@ -31,7 +31,7 @@ type DjRecommendTypeService struct {
 	CateId string `json:"type" form:"type"`
 }
 
-func (service *DjRecommendTypeService) DjRecommendType() (float64, string) {
+func (service *DjRecommendTypeService) DjRecommendType() (float64, []byte) {
 
 	options := &util.Options{
 		Crypto:  "weapi",

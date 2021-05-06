@@ -9,7 +9,7 @@ type UserRecordService struct {
 	Type string `json:"type" form:"type"`
 }
 
-func (service *UserRecordService) UserRecord() (float64, string) {
+func (service *UserRecordService) UserRecord() (float64, []byte) {
 
 	options := &util.Options{
 		Crypto:  "weapi",

@@ -8,7 +8,7 @@ import (
 type HistoryRecommendSongsService struct {
 }
 
-func (service *HistoryRecommendSongsService) HistoryRecommendSongs() (float64, string) {
+func (service *HistoryRecommendSongsService) HistoryRecommendSongs() (float64, []byte) {
 
 	cookiesOS := &http.Cookie{Name: "os", Value: "ios"}
 

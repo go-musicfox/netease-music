@@ -7,7 +7,7 @@ import (
 type VideoGroupListService struct {
 }
 
-func (service *VideoGroupListService) VideoGroupList() (float64, string) {
+func (service *VideoGroupListService) VideoGroupList() (float64, []byte) {
 
 	options := &util.Options{
 		Crypto:  "weapi",

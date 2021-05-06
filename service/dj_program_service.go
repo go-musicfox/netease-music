@@ -11,7 +11,7 @@ type DjProgramService struct {
 	Asc    string `json:"asc" form:"asc"`
 }
 
-func (service *DjProgramService) DjProgram() (float64, string) {
+func (service *DjProgramService) DjProgram() (float64, []byte) {
 
 	options := &util.Options{
 		Crypto:  "weapi",

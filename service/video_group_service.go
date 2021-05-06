@@ -9,7 +9,7 @@ type VideoGroupService struct {
 	Offset  string `json:"offset" form:"offset"`
 }
 
-func (service *VideoGroupService) VideoGroup() (float64, string) {
+func (service *VideoGroupService) VideoGroup() (float64, []byte) {
 
 	options := &util.Options{
 		Crypto:  "weapi",

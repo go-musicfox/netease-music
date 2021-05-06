@@ -8,7 +8,7 @@ type LikeListService struct {
 	UID string `json:"uid" form:"uid"`
 }
 
-func (service *LikeListService) LikeList() (float64, string) {
+func (service *LikeListService) LikeList() (float64, []byte) {
 
 	options := &util.Options{
 		Crypto:  "weapi",

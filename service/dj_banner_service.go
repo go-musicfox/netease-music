@@ -8,7 +8,7 @@ import (
 type DjBannerService struct {
 }
 
-func (service *DjBannerService) DjBanner() (float64, string) {
+func (service *DjBannerService) DjBanner() (float64, []byte) {
 
 	cookiesOS := &http.Cookie{Name: "os", Value: "pc"}
 

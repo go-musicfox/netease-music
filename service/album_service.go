@@ -8,7 +8,7 @@ type AlbumService struct {
 	ID string `json:"id" form:"id"`
 }
 
-func (service *AlbumService) Album() (float64, string) {
+func (service *AlbumService) Album() (float64, []byte) {
 
 	options := &util.Options{
 		Crypto:  "weapi",

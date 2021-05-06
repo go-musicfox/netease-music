@@ -7,7 +7,7 @@ import (
 type SettingService struct {
 }
 
-func (service *SettingService) Setting() (float64, string) {
+func (service *SettingService) Setting() (float64, []byte) {
 
 	options := &util.Options{
 		Crypto:  "weapi",

@@ -8,7 +8,7 @@ type SimiArtistService struct {
 	ID string `json:"id" form:"id"`
 }
 
-func (service *SimiArtistService) SimiArtist() (float64, string) {
+func (service *SimiArtistService) SimiArtist() (float64, []byte) {
 
 	options := &util.Options{
 		Crypto:  "weapi",

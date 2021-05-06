@@ -8,7 +8,7 @@ type DjTodayPerferedService struct {
 	Page string `json:"page" form:"page"`
 }
 
-func (service *DjTodayPerferedService) DjTodayPerfered() (float64, string) {
+func (service *DjTodayPerferedService) DjTodayPerfered() (float64, []byte) {
 
 	options := &util.Options{
 		Crypto:  "weapi",

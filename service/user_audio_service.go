@@ -8,7 +8,7 @@ type UserAudioService struct {
 	UID string `json:"uid" form:"uid"`
 }
 
-func (service *UserAudioService) UserAudio() (float64, string) {
+func (service *UserAudioService) UserAudio() (float64, []byte) {
 
 	options := &util.Options{
 		Crypto:  "weapi",

@@ -7,7 +7,7 @@ import (
 type DjCatelistService struct {
 }
 
-func (service *DjCatelistService) DjCatelist() (float64, string) {
+func (service *DjCatelistService) DjCatelist() (float64, []byte) {
 
 	options := &util.Options{
 		Crypto:  "weapi",

@@ -8,7 +8,7 @@ type VideoDetailService struct {
 	ID string `json:"id" form:"id"`
 }
 
-func (service *VideoDetailService) VideoDetail() (float64, string) {
+func (service *VideoDetailService) VideoDetail() (float64, []byte) {
 
 	options := &util.Options{
 		Crypto:  "weapi",

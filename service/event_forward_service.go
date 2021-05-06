@@ -11,7 +11,7 @@ type EventForwardService struct {
 	Forwards string `json:"forwards" form:"forwards"`
 }
 
-func (service *EventForwardService) EventForward() (float64, string) {
+func (service *EventForwardService) EventForward() (float64, []byte) {
 
 	cookiesOS := &http.Cookie{Name: "os", Value: "pc"}
 

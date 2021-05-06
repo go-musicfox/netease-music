@@ -9,7 +9,7 @@ type HomepageBlockPageService struct {
 	Refresh string `json:"refresh" form:"refresh"`
 }
 
-func (service *HomepageBlockPageService) HomepageBlockPage() (float64, string) {
+func (service *HomepageBlockPageService) HomepageBlockPage() (float64, []byte) {
 
 	cookiesOS := &http.Cookie{Name: "os", Value: "pc"}
 

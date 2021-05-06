@@ -10,7 +10,7 @@ type UserFollowedsService struct {
 	Time  string `json:"lasttime " form:"lasttime "`
 }
 
-func (service *UserFollowedsService) UserFolloweds() (float64, string) {
+func (service *UserFollowedsService) UserFolloweds() (float64, []byte) {
 
 	options := &util.Options{
 		Crypto:  "eapi",

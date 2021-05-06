@@ -9,7 +9,7 @@ type CheckMusicService struct {
 	Br string `json:"br" form:"br"`
 }
 
-func (service *CheckMusicService) CheckMusic() (float64, string) {
+func (service *CheckMusicService) CheckMusic() (float64, []byte) {
 
 	options := &util.Options{
 		Crypto:  "weapi",
