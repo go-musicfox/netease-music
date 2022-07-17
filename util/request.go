@@ -66,7 +66,7 @@ func CreateRequest(method string, url string, data map[string]string, options *O
 	}
 	req.Header.Set("User-Agent", chooseUserAgent(options.Ua))
 	csrfToken := ""
-	music_U := ""
+	musicU := ""
 
 	if method == "POST" {
 		req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
@@ -81,12 +81,17 @@ func CreateRequest(method string, url string, data map[string]string, options *O
 				csrfToken = cookie.Value
 			}
 			if cookie.Name == "MUSIC_U" {
-				music_U = cookie.Value
+				musicU = cookie.Value
 				cookieNuid := &http.Cookie{Name: "_ntes_nuid", Value: hex.EncodeToString([]byte(RandStringRunes(16)))}
 				req.SetCookie(cookieNuid)
 			}
 		}
 	}
+
+	if musicU == "" {
+		req.SetCookie(&http.Cookie{Name: "MUSIC_A", Value: ""})
+	}
+
 	if options.Crypto == "weapi" {
 		data["csrf_token"] = csrfToken
 		data = Weapi(data)
@@ -118,7 +123,7 @@ func CreateRequest(method string, url string, data map[string]string, options *O
 			"os":          "android",
 			"channel":     "",
 			"requestId":   strconv.FormatInt(time.Now().Unix()*1000, 10) + strconv.Itoa(rand.Intn(1000)),
-			"MUSIC_U":     music_U,
+			"MUSIC_U":     musicU,
 		}
 
 		for key, value := range header {

@@ -12,23 +12,35 @@ type LoginCellphoneService struct {
 	Countrycode string `json:"countrycode" form:"countrycode"`
 	Password    string `json:"password" form:"password"`
 	Md5password string `json:"md5_password" form:"md5_password"`
+	Captcha     string `json:"captcha" from:"captcha"`
+	CsrfToken   string `json:"csrf_token" from:"csrf_token"`
 }
 
 func (service *LoginCellphoneService) LoginCellphone() (float64, []byte) {
 
 	cookiesOS := &http.Cookie{Name: "os", Value: "pc"}
+	appVersion := &http.Cookie{Name: "appver", Value: "2.9.7"}
 
 	options := &util.Options{
 		Crypto:  "weapi",
 		Ua:      "pc",
-		Cookies: []*http.Cookie{cookiesOS},
+		Cookies: []*http.Cookie{cookiesOS, appVersion},
 	}
 	data := make(map[string]string)
 
 	data["phone"] = service.Phone
 	if service.Countrycode != "" {
 		data["countrycode"] = service.Countrycode
+	} else {
+		data["countrycode"] = "86"
 	}
+
+	if service.Captcha != "" {
+		data["captcha"] = service.Captcha
+	}
+
+	data["csrf_token"] = service.CsrfToken
+
 	if service.Password != "" {
 		h := md5.New()
 		h.Write([]byte(service.Password))
