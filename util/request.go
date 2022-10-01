@@ -12,7 +12,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/asmcos/requests"
+	"github.com/anhoder/requests"
 	"github.com/buger/jsonparser"
 	"github.com/cnsilvan/UnblockNeteaseMusic/processor"
 )
@@ -142,9 +142,9 @@ func CreateRequest(method string, url string, data map[string]string, options *O
 	)
 	if method == "POST" {
 		var form requests.Datas = data
-		resp, err = req.Post(url, UNMSwitch, form)
+		resp, err = req.Post(url, requests.DryRun(UNMSwitch), form)
 	} else {
-		resp, err = req.Get(url, UNMSwitch)
+		resp, err = req.Get(url, requests.DryRun(UNMSwitch))
 	}
 	if err != nil {
 		return 520, []byte(err.Error()), nil
