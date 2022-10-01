@@ -7,8 +7,8 @@ import (
 
 func TestSearchService_Search(t *testing.T) {
 	service := &SearchService{
-		S:    "周杰伦",
-		Type: "100",
+		S:    "测试",
+		Type: "1",
 	}
 	code, resp := service.Search()
 	fmt.Println(code, string(resp))
