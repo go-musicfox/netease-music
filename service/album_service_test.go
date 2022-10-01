@@ -3,9 +3,13 @@ package service
 import (
 	"fmt"
 	"testing"
+
+	"github.com/anhoder/netease-music/util"
 )
 
 func TestAlbumService_Album(t *testing.T) {
+	util.UNMSwitch = true
+	util.Sources = []string{"kuwo"}
 	service := &AlbumService{
 		ID: "147779282",
 	}

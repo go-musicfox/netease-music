@@ -11,13 +11,6 @@ type SongUrlService struct {
 	Br string `json:"br" form:"br"`
 }
 
-var brMapping = map[string]string{
-	"128000": "standard",
-	"320000": "higher",
-	"441000": "exhigh",
-	"999000": "lossless",
-}
-
 func (service *SongUrlService) SongUrl() (float64, []byte) {
 
 	cookiesOS := &http.Cookie{Name: "os", Value: "pc"}
@@ -32,12 +25,6 @@ func (service *SongUrlService) SongUrl() (float64, []byte) {
 		service.Br = "320000"
 	}
 	data["br"] = service.Br
-
-	var level = "higher"
-	if l, ok := brMapping[service.Br]; ok {
-		level = l
-	}
-	data["level"] = level
 
 	code, reBody, _ := util.CreateRequest("POST", `https://music.163.com/api/song/enhance/player/url`, data, options)
 
