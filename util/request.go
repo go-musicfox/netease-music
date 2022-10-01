@@ -136,32 +136,42 @@ func CreateRequest(method string, url string, data map[string]string, options *O
 		reg, _ := regexp.Compile(`/\w*api/`)
 		url = reg.ReplaceAllString(url, "/eapi/")
 	}
-	var err error
+	var (
+		err  error
+		resp *requests.Response
+	)
 	if method == "POST" {
 		var form requests.Datas = data
-		_, err = req.Post(url, true, form)
+		resp, err = req.Post(url, UNMSwitch, form)
 	} else {
-		_, err = req.Get(url, true)
+		resp, err = req.Get(url, UNMSwitch)
 	}
 	if err != nil {
 		return 520, []byte(err.Error()), nil
 	}
 
-	request := req.HttpRequest()
-	netease := processor.RequestBefore(request)
-	if netease == nil {
-		return 520, []byte("Request Blocked:" + url), nil
+	if UNMSwitch {
+		ConfigInit()
+
+		request := req.HttpRequest()
+		netease := processor.RequestBefore(request)
+		if netease == nil {
+			return 520, []byte("Request Blocked:" + url), nil
+		}
+
+		response, err := processor.Request(request, url)
+		if err != nil {
+			return 520, []byte("Request Error:" + url), nil
+		}
+		defer response.Body.Close()
+
+		processor.RequestAfter(request, response, netease)
+
+		resp = &requests.Response{}
+		resp.SetRequest(req)
+		resp.R = response
 	}
 
-	response, err := processor.Request(request, url)
-	if err != nil {
-		return 520, []byte("Request Error:" + url), nil
-	}
-	defer response.Body.Close()
-
-	resp := &requests.Response{}
-	resp.SetRequest(req)
-	resp.R = response
 	cookies := resp.Cookies()
 
 	body := resp.Content()
