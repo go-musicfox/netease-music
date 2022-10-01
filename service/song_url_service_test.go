@@ -24,7 +24,7 @@ func TestSongUrlService_SongUrlWithUNM(t *testing.T) {
 	util.Sources = []string{"kuwo"}
 	service := &SongUrlService{
 		ID: "1962165890",
-		Br: "999000",
+		Br: "320000",
 	}
 	code, resp := service.SongUrl()
 	fmt.Println(code, string(resp))
