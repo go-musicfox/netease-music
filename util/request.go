@@ -4,8 +4,6 @@ import (
 	"bytes"
 	"compress/zlib"
 	"encoding/hex"
-	"github.com/asmcos/requests"
-	"github.com/buger/jsonparser"
 	"io"
 	"math/rand"
 	"net/http"
@@ -13,6 +11,10 @@ import (
 	"strconv"
 	"strings"
 	"time"
+
+	"github.com/asmcos/requests"
+	"github.com/buger/jsonparser"
+	"github.com/cnsilvan/UnblockNeteaseMusic/processor"
 )
 
 type Options struct {
@@ -134,18 +136,32 @@ func CreateRequest(method string, url string, data map[string]string, options *O
 		reg, _ := regexp.Compile(`/\w*api/`)
 		url = reg.ReplaceAllString(url, "/eapi/")
 	}
-	var resp *requests.Response
 	var err error
 	if method == "POST" {
 		var form requests.Datas = data
-		resp, err = req.Post(url, form)
+		_, err = req.Post(url, true, form)
 	} else {
-		resp, err = req.Get(url)
+		_, err = req.Get(url, true)
 	}
-
 	if err != nil {
 		return 520, []byte(err.Error()), nil
 	}
+
+	request := req.HttpRequest()
+	netease := processor.RequestBefore(request)
+	if netease == nil {
+		return 520, []byte("Request Blocked:" + url), nil
+	}
+
+	response, err := processor.Request(request, url)
+	if err != nil {
+		return 520, []byte("Request Error:" + url), nil
+	}
+	defer response.Body.Close()
+
+	resp := &requests.Response{}
+	resp.SetRequest(req)
+	resp.R = response
 	cookies := resp.Cookies()
 
 	body := resp.Content()
@@ -155,7 +171,7 @@ func CreateRequest(method string, url string, data map[string]string, options *O
 	r, err := zlib.NewReader(b)
 	// 数据被压缩 进行解码
 	if err == nil {
-		io.Copy(&out, r)
+		_, _ = io.Copy(&out, r)
 		body = out.Bytes()
 	}
 
