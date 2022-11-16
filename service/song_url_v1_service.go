@@ -16,6 +16,15 @@ const (
 	Hires    SongQualityLevel = "hires"
 )
 
+func (level SongQualityLevel) IsValid() bool {
+	switch level {
+	case Standard, Higher, Exhigh, Lossless, Hires:
+		return true
+	default:
+		return false
+	}
+}
+
 type SongUrlV1Service struct {
 	ID         string           `json:"id" form:"id"`
 	Level      SongQualityLevel `json:"level" form:"level"` // standard,higher,exhigh,lossless,hires
