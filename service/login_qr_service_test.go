@@ -17,6 +17,12 @@ func TestLoginQRService(t *testing.T) {
 	}
 
 	code, resp = service.CheckQR()
+	if code != 803 {
+		t.Fatalf("code error: %f", code)
+	}
+
+	accountService := &UserAccountService{}
+	code, resp = accountService.AccountInfo()
 	if code != 200 {
 		t.Fatalf("code error: %f", code)
 	}
