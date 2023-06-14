@@ -15,8 +15,9 @@
 
 ## 环境要求
 
-需要 Golang 1.12以上 环境
+文档参考[NeteaseCloudMusicApi](https://github.com/Binaryify/NeteaseCloudMusicApi)
 
+需要 Golang 1.12以上 环境
 
 ## 运行
 
@@ -42,3 +43,5 @@ func main() {
 }
 
 ```
+
+
