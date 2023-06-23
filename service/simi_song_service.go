@@ -1,7 +1,7 @@
 package service
 
 import (
-	"github.com/anhoder/netease-music/util"
+	"github.com/go-musicfox/netease-music/util"
 )
 
 type SimiSongService struct {
@@ -13,7 +13,7 @@ type SimiSongService struct {
 func (service *SimiSongService) SimiSong() (float64, []byte) {
 
 	options := &util.Options{
-		Crypto:  "weapi",
+		Crypto: "weapi",
 	}
 	data := make(map[string]string)
 	data["songid"] = service.ID

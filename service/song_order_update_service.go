@@ -1,7 +1,7 @@
 package service
 
 import (
-	"github.com/anhoder/netease-music/util"
+	"github.com/go-musicfox/netease-music/util"
 )
 
 type SongOrderUpdateService struct {
@@ -12,8 +12,8 @@ type SongOrderUpdateService struct {
 func (service *SongOrderUpdateService) SongOrderUpdate() (float64, []byte) {
 
 	options := &util.Options{
-		Crypto:  "weapi",
-		Url:     "/api/playlist/desc/update",
+		Crypto: "weapi",
+		Url:    "/api/playlist/desc/update",
 	}
 	data := make(map[string]string)
 	data["pid"] = service.Pid

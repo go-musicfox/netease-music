@@ -1,7 +1,7 @@
 package service
 
 import (
-	"github.com/anhoder/netease-music/util"
+	"github.com/go-musicfox/netease-music/util"
 )
 
 type UserFollowedsService struct {
@@ -13,8 +13,8 @@ type UserFollowedsService struct {
 func (service *UserFollowedsService) UserFolloweds() (float64, []byte) {
 
 	options := &util.Options{
-		Crypto:  "eapi",
-		Url:     "/api/user/getfolloweds",
+		Crypto: "eapi",
+		Url:    "/api/user/getfolloweds",
 	}
 	data := make(map[string]string)
 	data["userId"] = service.Uid

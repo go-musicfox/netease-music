@@ -2,9 +2,10 @@ package service
 
 import (
 	"encoding/json"
-	"github.com/anhoder/netease-music/util"
 	"net/http"
 	"strings"
+
+	"github.com/go-musicfox/netease-music/util"
 )
 
 type SongDetailService struct {

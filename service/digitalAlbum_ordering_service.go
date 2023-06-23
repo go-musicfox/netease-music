@@ -2,7 +2,8 @@ package service
 
 import (
 	"encoding/json"
-	"github.com/anhoder/netease-music/util"
+
+	"github.com/go-musicfox/netease-music/util"
 )
 
 type DigitalAlbumOrderingService struct {
@@ -14,7 +15,7 @@ type DigitalAlbumOrderingService struct {
 func (service *DigitalAlbumOrderingService) DigitalAlbumOrdering() (float64, []byte) {
 
 	options := &util.Options{
-		Crypto:  "weapi",
+		Crypto: "weapi",
 	}
 	data := make(map[string]string)
 	data["business"] = "Album"

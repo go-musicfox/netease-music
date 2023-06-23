@@ -1,7 +1,7 @@
 package service
 
 import (
-	"github.com/anhoder/netease-music/util"
+	"github.com/go-musicfox/netease-music/util"
 )
 
 type DjRadioHotService struct {
@@ -13,7 +13,7 @@ type DjRadioHotService struct {
 func (service *DjRadioHotService) DjRadioHot() (float64, []byte) {
 
 	options := &util.Options{
-		Crypto:  "weapi",
+		Crypto: "weapi",
 	}
 	data := make(map[string]string)
 	data["cateId"] = service.CateId

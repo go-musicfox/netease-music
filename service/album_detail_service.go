@@ -1,7 +1,7 @@
 package service
 
 import (
-	"github.com/anhoder/netease-music/util"
+	"github.com/go-musicfox/netease-music/util"
 )
 
 type AlbumDetailService struct {
@@ -11,7 +11,7 @@ type AlbumDetailService struct {
 func (service *AlbumDetailService) AlbumDetail() (float64, []byte) {
 
 	options := &util.Options{
-		Crypto:  "weapi",
+		Crypto: "weapi",
 	}
 	data := make(map[string]string)
 	data["id"] = service.ID

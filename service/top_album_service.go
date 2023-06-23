@@ -1,10 +1,11 @@
 package service
 
 import (
-	"github.com/anhoder/netease-music/util"
 	"net/http"
 	"strconv"
 	"time"
+
+	"github.com/go-musicfox/netease-music/util"
 )
 
 type TopAlbumService struct {

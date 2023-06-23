@@ -1,7 +1,7 @@
 package service
 
 import (
-	"github.com/anhoder/netease-music/util"
+	"github.com/go-musicfox/netease-music/util"
 )
 
 type DjProgramService struct {
@@ -14,7 +14,7 @@ type DjProgramService struct {
 func (service *DjProgramService) DjProgram() (float64, []byte) {
 
 	options := &util.Options{
-		Crypto:  "weapi",
+		Crypto: "weapi",
 	}
 	data := make(map[string]string)
 	data["radioId"] = service.RID

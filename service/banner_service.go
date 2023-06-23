@@ -1,7 +1,7 @@
 package service
 
 import (
-	"github.com/anhoder/netease-music/util"
+	"github.com/go-musicfox/netease-music/util"
 )
 
 type BannerService struct {
@@ -11,7 +11,7 @@ type BannerService struct {
 func (service *BannerService) Banner() (float64, []byte) {
 
 	options := &util.Options{
-		Crypto:  "linuxapi",
+		Crypto: "linuxapi",
 	}
 
 	TYPE := make(map[string]string, 6)

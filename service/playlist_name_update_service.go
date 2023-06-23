@@ -1,7 +1,7 @@
 package service
 
 import (
-	"github.com/anhoder/netease-music/util"
+	"github.com/go-musicfox/netease-music/util"
 )
 
 type PlaylistNameUpdateService struct {
@@ -12,8 +12,8 @@ type PlaylistNameUpdateService struct {
 func (service *PlaylistNameUpdateService) PlaylistNameUpdate() (float64, []byte) {
 
 	options := &util.Options{
-		Crypto:  "eapi",
-		Url:     "/api/playlist/update/name",
+		Crypto: "eapi",
+		Url:    "/api/playlist/update/name",
 	}
 	data := make(map[string]string)
 	data["id"] = service.Id

@@ -1,7 +1,7 @@
 package service
 
 import (
-	"github.com/anhoder/netease-music/util"
+	"github.com/go-musicfox/netease-music/util"
 )
 
 type CellphoneExistenceCheckService struct {
@@ -12,8 +12,8 @@ type CellphoneExistenceCheckService struct {
 func (service *CellphoneExistenceCheckService) CellphoneExistenceCheck() (float64, []byte) {
 
 	options := &util.Options{
-		Crypto:  "eapi",
-		Url:     "/api/cellphone/existence/check",
+		Crypto: "eapi",
+		Url:    "/api/cellphone/existence/check",
 	}
 	data := make(map[string]string)
 	if service.Countrycode != "" {

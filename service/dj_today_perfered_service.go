@@ -1,7 +1,7 @@
 package service
 
 import (
-	"github.com/anhoder/netease-music/util"
+	"github.com/go-musicfox/netease-music/util"
 )
 
 type DjTodayPerferedService struct {
@@ -11,7 +11,7 @@ type DjTodayPerferedService struct {
 func (service *DjTodayPerferedService) DjTodayPerfered() (float64, []byte) {
 
 	options := &util.Options{
-		Crypto:  "weapi",
+		Crypto: "weapi",
 	}
 	data := make(map[string]string)
 	if service.Page == "" {

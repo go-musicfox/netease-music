@@ -2,7 +2,8 @@ package service
 
 import (
 	"encoding/json"
-	"github.com/anhoder/netease-music/util"
+
+	"github.com/go-musicfox/netease-music/util"
 )
 
 type MvAllService struct {
@@ -16,7 +17,7 @@ type MvAllService struct {
 func (service *MvAllService) MvAll() (float64, []byte) {
 
 	options := &util.Options{
-		Crypto:  "weapi",
+		Crypto: "weapi",
 	}
 	data := make(map[string]string)
 

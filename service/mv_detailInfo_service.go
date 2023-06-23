@@ -1,7 +1,7 @@
 package service
 
 import (
-	"github.com/anhoder/netease-music/util"
+	"github.com/go-musicfox/netease-music/util"
 )
 
 type MvDetailInfoService struct {
@@ -11,7 +11,7 @@ type MvDetailInfoService struct {
 func (service *MvDetailInfoService) MvDetailInfo() (float64, []byte) {
 
 	options := &util.Options{
-		Crypto:  "weapi",
+		Crypto: "weapi",
 	}
 	data := make(map[string]string)
 	data["threadid"] = "R_MV_5_" + service.ID

@@ -2,8 +2,9 @@ package service
 
 import (
 	"encoding/json"
-	"github.com/anhoder/netease-music/util"
 	"regexp"
+
+	"github.com/go-musicfox/netease-music/util"
 )
 
 type RelatedPlaylistService struct {
@@ -13,8 +14,8 @@ type RelatedPlaylistService struct {
 func (service *RelatedPlaylistService) RelatedPlaylist() (float64, []byte) {
 
 	options := &util.Options{
-		Crypto:  "weapi",
-		Ua:      "pc",
+		Crypto: "weapi",
+		Ua:     "pc",
 	}
 	data := make(map[string]string)
 

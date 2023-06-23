@@ -1,7 +1,7 @@
 package service
 
 import (
-	"github.com/anhoder/netease-music/util"
+	"github.com/go-musicfox/netease-music/util"
 )
 
 type VideoDetailService struct {
@@ -11,7 +11,7 @@ type VideoDetailService struct {
 func (service *VideoDetailService) VideoDetail() (float64, []byte) {
 
 	options := &util.Options{
-		Crypto:  "weapi",
+		Crypto: "weapi",
 	}
 	data := make(map[string]string)
 	data["id"] = service.ID

@@ -1,7 +1,7 @@
 package service
 
 import (
-	"github.com/anhoder/netease-music/util"
+	"github.com/go-musicfox/netease-music/util"
 )
 
 type SearchHotService struct {
@@ -10,8 +10,8 @@ type SearchHotService struct {
 func (service *SearchHotService) SearchHot() (float64, []byte) {
 
 	options := &util.Options{
-		Crypto:  "weapi",
-		Ua:      "mobile",
+		Crypto: "weapi",
+		Ua:     "mobile",
 	}
 	data := make(map[string]string)
 	data["type"] = "1111"

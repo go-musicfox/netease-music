@@ -1,7 +1,7 @@
 package service
 
 import (
-	"github.com/anhoder/netease-music/util"
+	"github.com/go-musicfox/netease-music/util"
 )
 
 type PersonalizedNewsongService struct {
@@ -10,7 +10,7 @@ type PersonalizedNewsongService struct {
 func (service *PersonalizedNewsongService) PersonalizedNewsong() (float64, []byte) {
 
 	options := &util.Options{
-		Crypto:  "weapi",
+		Crypto: "weapi",
 	}
 	data := make(map[string]string)
 

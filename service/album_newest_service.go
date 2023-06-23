@@ -1,11 +1,12 @@
 package service
 
 import (
-	"github.com/anhoder/netease-music/util"
 	"net/http"
+
+	"github.com/go-musicfox/netease-music/util"
 )
 
-type AlbumNewestService struct {}
+type AlbumNewestService struct{}
 
 func (service *AlbumNewestService) AlbumNewest() (float64, []byte) {
 

@@ -2,8 +2,9 @@ package service
 
 import (
 	"fmt"
-	"github.com/anhoder/netease-music/util"
 	"strings"
+
+	"github.com/go-musicfox/netease-music/util"
 )
 
 /*
@@ -34,7 +35,7 @@ type ArtistListService struct {
 func (service *ArtistListService) ArtistList() (float64, []byte) {
 
 	options := &util.Options{
-		Crypto:  "weapi",
+		Crypto: "weapi",
 	}
 	data := make(map[string]string)
 	if service.Limit == "" {

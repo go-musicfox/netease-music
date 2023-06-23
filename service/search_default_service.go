@@ -1,7 +1,7 @@
 package service
 
 import (
-	"github.com/anhoder/netease-music/util"
+	"github.com/go-musicfox/netease-music/util"
 )
 
 type SearchDefaultService struct {
@@ -10,8 +10,8 @@ type SearchDefaultService struct {
 func (service *SearchDefaultService) SearchDefault() (float64, []byte) {
 
 	options := &util.Options{
-		Crypto:  "eapi",
-		Url:     "/api/search/defaultkeyword/get",
+		Crypto: "eapi",
+		Url:    "/api/search/defaultkeyword/get",
 	}
 	data := make(map[string]string)
 

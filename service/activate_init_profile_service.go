@@ -1,7 +1,7 @@
 package service
 
 import (
-	"github.com/anhoder/netease-music/util"
+	"github.com/go-musicfox/netease-music/util"
 )
 
 type ActivateInitProfileService struct {
@@ -11,8 +11,8 @@ type ActivateInitProfileService struct {
 func (service *ActivateInitProfileService) ActivateInitProfile() (float64, []byte) {
 
 	options := &util.Options{
-		Crypto:  "eapi",
-		Url:     "/api/activate/initProfile",
+		Crypto: "eapi",
+		Url:    "/api/activate/initProfile",
 	}
 	data := make(map[string]string)
 	data["nickname"] = service.Nickname

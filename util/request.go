@@ -15,9 +15,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com/anhoder/requests"
 	"github.com/buger/jsonparser"
 	"github.com/cnsilvan/UnblockNeteaseMusic/processor"
+	"github.com/go-musicfox/requests"
 )
 
 type Options struct {

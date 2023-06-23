@@ -22,7 +22,7 @@
 ## 运行
 
 ```shell
-go get -u github.com/anhoder/netease-music
+go get -u github.com/go-musicfox/netease-music
 ```
 
 ```go
@@ -30,8 +30,8 @@ package main
 
 import (
     "fmt"
-    "github.com/anhoder/netease-music/service"
-    "github.com/anhoder/netease-music/util"
+    "github.com/go-musicfox/netease-music/service"
+    "github.com/go-musicfox/netease-music/util"
     "github.com/telanflow/cookiejar"
 )
 

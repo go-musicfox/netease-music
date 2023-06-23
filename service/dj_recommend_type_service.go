@@ -1,7 +1,7 @@
 package service
 
 import (
-	"github.com/anhoder/netease-music/util"
+	"github.com/go-musicfox/netease-music/util"
 )
 
 /*
@@ -34,7 +34,7 @@ type DjRecommendTypeService struct {
 func (service *DjRecommendTypeService) DjRecommendType() (float64, []byte) {
 
 	options := &util.Options{
-		Crypto:  "weapi",
+		Crypto: "weapi",
 	}
 	data := make(map[string]string)
 	data["cateId"] = service.CateId
