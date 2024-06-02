@@ -10,3 +10,7 @@ require (
 	github.com/mitchellh/mapstructure v1.5.0 // indirect
 	golang.org/x/text v0.10.0 // indirect
 )
+
+replace (
+	github.com/cnsilvan/UnblockNeteaseMusic => github.com/go-musicfox/UnblockNeteaseMusic v0.1.3
+)
