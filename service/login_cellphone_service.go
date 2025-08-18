@@ -3,7 +3,9 @@ package service
 import (
 	"crypto/md5"
 	"encoding/hex"
-	"net/http"
+	"encoding/json"
+	"io"
+	"log"
 
 	"github.com/go-musicfox/netease-music/util"
 )
@@ -19,14 +21,14 @@ type LoginCellphoneService struct {
 
 func (service *LoginCellphoneService) LoginCellphone() (float64, []byte) {
 
-	cookiesOS := &http.Cookie{Name: "os", Value: "ios"}
-	appVersion := &http.Cookie{Name: "appver", Value: "8.7.01"}
+	// cookiesOS := &http.Cookie{Name: "os", Value: "ios"}
+	// appVersion := &http.Cookie{Name: "appver", Value: "8.7.01"}
 
-	options := &util.Options{
-		Crypto:  "weapi",
-		Ua:      "pc",
-		Cookies: []*http.Cookie{cookiesOS, appVersion},
-	}
+	// options := &util.Options{
+	// 	Crypto:  "weapi",
+	// 	Ua:      "pc",
+	// 	Cookies: []*http.Cookie{cookiesOS, appVersion},
+	// }
 	data := make(map[string]string)
 
 	data["phone"] = service.Phone
@@ -51,7 +53,27 @@ func (service *LoginCellphoneService) LoginCellphone() (float64, []byte) {
 	}
 	data["rememberLogin"] = "true"
 
-	code, reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/login/cellphone`, data, options)
+	// code, reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/login/cellphone`, data, options)
 
-	return code, reBody
+	api := "https://music.163.com/weapi/login/cellphone"
+	req := util.NewRequest(api)
+	// 传入加密后的formdata
+	req.Datas = util.Weapi(data)
+	resp := req.SendPost()
+	bodyBytes, err := io.ReadAll(resp.Body)
+	if err != nil {
+		log.Fatalf("Error reading body: %v", err)
+	}
+	defer resp.Body.Close()
+	// 获取api调用后的code
+	var respData map[string]interface{}
+	err = json.Unmarshal(bodyBytes, &respData)
+	if err != nil {
+		log.Fatalf("Error unmarshaling JSON: %v", err)
+	}
+	code, ok := respData["code"].(float64)
+	if !ok {
+		log.Fatal("Could not get 'code' or it's not a number")
+	}
+	return code, bodyBytes
 }
