@@ -3,9 +3,6 @@ package service
 import (
 	"crypto/md5"
 	"encoding/hex"
-	"encoding/json"
-	"io"
-	"log"
 
 	"github.com/go-musicfox/netease-music/util"
 )
@@ -56,24 +53,6 @@ func (service *LoginCellphoneService) LoginCellphone() (float64, []byte) {
 	// code, reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/login/cellphone`, data, options)
 
 	api := "https://music.163.com/weapi/login/cellphone"
-	req := util.NewRequest(api)
-	// 传入加密后的formdata
-	req.Datas = util.Weapi(data)
-	resp := req.SendPost()
-	bodyBytes, err := io.ReadAll(resp.Body)
-	if err != nil {
-		log.Fatalf("Error reading body: %v", err)
-	}
-	defer resp.Body.Close()
-	// 获取api调用后的code
-	var respData map[string]interface{}
-	err = json.Unmarshal(bodyBytes, &respData)
-	if err != nil {
-		log.Fatalf("Error unmarshaling JSON: %v", err)
-	}
-	code, ok := respData["code"].(float64)
-	if !ok {
-		log.Fatal("Could not get 'code' or it's not a number")
-	}
+	code, bodyBytes := util.CallWeapi(api, data)
 	return code, bodyBytes
 }

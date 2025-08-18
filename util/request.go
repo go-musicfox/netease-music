@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"compress/zlib"
 	"encoding/hex"
+	"encoding/json"
 	"io"
 	"log"
 	"math/rand"
@@ -54,6 +55,13 @@ var cookieJar http.CookieJar
 
 func SetGlobalCookieJar(jar http.CookieJar) {
 	cookieJar = jar
+}
+
+func GetGlobalCookieJar() http.CookieJar {
+	if cookieJar == nil {
+		cookieJar, _ = cookiejar.New(&cookiejar.Options{})
+	}
+	return cookieJar
 }
 
 func CookieValueByName(cookies []*http.Cookie, name string, fallback string) string {
@@ -272,13 +280,30 @@ func NewRequest(url string) *request {
 	if cookieJar == nil {
 		cookieJar, _ = cookiejar.New(&cookiejar.Options{})
 	}
+	host := "https://music.163.com"
+	targetUrl, err := urlpkg.Parse(host)
+	if err != nil {
+		log.Fatalf("无法解析 URL: %v", err)
+	}
+
+	// 生成与设备标识有关的cookie
+	sessionCookie := &http.Cookie{
+		Name:   "sDeviceId",
+		Value:  GenerateChainID(cookieJar),
+		Path:   "/",
+		Domain: "music.163.com",
+	}
+
+	cookiesToSet := []*http.Cookie{sessionCookie}
+	// 将cookie添加到CookieJar
+	cookieJar.SetCookies(targetUrl, cookiesToSet)
 	req.Client.Jar = cookieJar
 	return &request{
 		Req: req,
 		Url: url,
 		Headers: map[string]string{
 			"User-Agent": chooseUserAgent("pc"),
-			"Referer":    "https://music.163.com/",
+			"Referer":    host,
 		},
 		Params: map[string]string{},
 		Datas:  map[string]string{},
@@ -328,4 +353,32 @@ func (req *request) SendPost() (Response *http.Response) {
 		Response = resp.R
 	}
 	return Response
+}
+
+// 调用网易云音乐的API
+//
+// 返回：
+// - code: API调用后的状态码
+// - bodyBytes: API返回的内容
+func CallWeapi(api string, data map[string]string) (code float64, bodyBytes []byte) {
+	req := NewRequest(api)
+	// 传入加密后的formdata
+	req.Datas = Weapi(data)
+	resp := req.SendPost()
+	bodyBytes, err := io.ReadAll(resp.Body)
+	if err != nil {
+		log.Fatalf("Error reading body: %v", err)
+	}
+	defer resp.Body.Close()
+	// 获取api调用后的code
+	var respData map[string]interface{}
+	err = json.Unmarshal(bodyBytes, &respData)
+	if err != nil {
+		log.Fatalf("Error unmarshaling JSON: %v", err)
+	}
+	code, ok := respData["code"].(float64)
+	if !ok {
+		log.Fatal("Could not get 'code' or it's not a number")
+	}
+	return code, bodyBytes
 }
