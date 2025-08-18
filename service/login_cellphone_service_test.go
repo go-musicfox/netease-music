@@ -1,7 +1,6 @@
 package service
 
 import (
-	"fmt"
 	"testing"
 )
 
@@ -10,9 +9,10 @@ func TestLoginCellphoneService_LoginCellphone(t *testing.T) {
 		Phone:    "",
 		Password: "",
 	}
-	code, resp := service.LoginCellphone()
-	fmt.Println(code, string(resp))
+	code, content := service.LoginCellphone()
+	t.Logf("code: %f, content: %s", code, content)
 	if code != 200 {
 		t.Errorf("code error: %f", code)
+		t.Errorf("content: %s", content)
 	}
 }
