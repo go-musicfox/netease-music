@@ -51,17 +51,21 @@ func chooseUserAgent(ua string) string {
 	return userAgentList["pc"]
 }
 
-var cookieJar http.CookieJar
+var (
+	globalCookieJar http.CookieJar
+	once            sync.Once
+)
 
 func SetGlobalCookieJar(jar http.CookieJar) {
-	cookieJar = jar
+	globalCookieJar = jar
 }
 
 func GetGlobalCookieJar() http.CookieJar {
-	if cookieJar == nil {
-		cookieJar, _ = cookiejar.New(&cookiejar.Options{})
-	}
-	return cookieJar
+	once.Do(func() {
+		jar, _ := cookiejar.New(nil)
+		globalCookieJar = jar
+	})
+	return globalCookieJar
 }
 
 func CookieValueByName(cookies []*http.Cookie, name string, fallback string) string {
@@ -90,12 +94,10 @@ func CreateRequest(method, url string, data map[string]string, options *Options)
 		globalDeviceId = deviceIds[idx]
 	})
 
-	if cookieJar == nil {
-		cookieJar, _ = cookiejar.New(&cookiejar.Options{})
-	}
+	globalCookieJar = GetGlobalCookieJar()
 
 	if u, err := urlpkg.Parse(url); err == nil {
-		options.Cookies = append(options.Cookies, cookieJar.Cookies(u)...)
+		options.Cookies = append(options.Cookies, globalCookieJar.Cookies(u)...)
 	}
 	req := requests.Requests()
 
@@ -114,7 +116,7 @@ func CreateRequest(method, url string, data map[string]string, options *Options)
 		csrfToken   = CookieValueByName(options.Cookies, "__csrf", "")
 	)
 
-	req.Client.Jar = cookieJar
+	req.Client.Jar = globalCookieJar
 	req.Header.Set("User-Agent", chooseUserAgent(options.Ua))
 	req.Header.Set("os", os)
 	req.Header.Set("appver", appver)
@@ -276,27 +278,13 @@ type request struct {
 // 初始化并返回一个request结构体以进行发送请求前的准备
 func NewRequest(url string) *request {
 	req := requests.Requests()
-	// 设置全局CookieJar
-	if cookieJar == nil {
-		cookieJar, _ = cookiejar.New(&cookiejar.Options{})
+	cookieJar := GetGlobalCookieJar()
+	cookieMap := map[string]string{
+		"sDeviceId": GenerateChainID(cookieJar),
 	}
 	host := "https://music.163.com"
-	targetUrl, err := urlpkg.Parse(host)
-	if err != nil {
-		log.Fatalf("无法解析 URL: %v", err)
-	}
-
-	// 生成与设备标识有关的cookie
-	sessionCookie := &http.Cookie{
-		Name:   "sDeviceId",
-		Value:  GenerateChainID(cookieJar),
-		Path:   "/",
-		Domain: "music.163.com",
-	}
-
-	cookiesToSet := []*http.Cookie{sessionCookie}
-	// 将cookie添加到CookieJar
-	cookieJar.SetCookies(targetUrl, cookiesToSet)
+	// 添加设备ID
+	AddCookiesToJar(cookieJar, cookieMap, host)
 	req.Client.Jar = cookieJar
 	return &request{
 		Req: req,
@@ -355,7 +343,7 @@ func (req *request) SendPost() (Response *http.Response) {
 	return Response
 }
 
-// 调用网易云音乐的API
+// 调用网易云音乐的web端API
 //
 // 返回：
 // - code: API调用后的状态码
