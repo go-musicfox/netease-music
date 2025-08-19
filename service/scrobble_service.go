@@ -13,9 +13,6 @@ type ScrobbleService struct {
 }
 
 func (service *ScrobbleService) Scrobble() (float64, []byte) {
-	options := &util.Options{
-		Crypto: "weapi",
-	}
 
 	var logs = []map[string]interface{}{
 		{
@@ -38,7 +35,11 @@ func (service *ScrobbleService) Scrobble() (float64, []byte) {
 		data["logs"] = string(str)
 	}
 
-	code, reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/feedback/weblog`, data, options)
+	api := "https://clientlogusf.music.163.com/weapi/feedback/weblog"
+	cookiejar := util.GetGlobalCookieJar()
+	csrfToken := util.GetCsrfToken(cookiejar)
+	data["csrf_token"] = csrfToken
+	code, bodyBytes := util.CallWeapi(api+"?csrf_token="+csrfToken, data)
 
-	return code, reBody
+	return code, bodyBytes
 }

@@ -17,15 +17,6 @@ type LoginCellphoneService struct {
 }
 
 func (service *LoginCellphoneService) LoginCellphone() (float64, []byte) {
-
-	// cookiesOS := &http.Cookie{Name: "os", Value: "ios"}
-	// appVersion := &http.Cookie{Name: "appver", Value: "8.7.01"}
-
-	// options := &util.Options{
-	// 	Crypto:  "weapi",
-	// 	Ua:      "pc",
-	// 	Cookies: []*http.Cookie{cookiesOS, appVersion},
-	// }
 	data := make(map[string]string)
 
 	data["phone"] = service.Phone
@@ -49,8 +40,6 @@ func (service *LoginCellphoneService) LoginCellphone() (float64, []byte) {
 		data["password"] = service.Md5password
 	}
 	data["rememberLogin"] = "true"
-
-	// code, reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/login/cellphone`, data, options)
 
 	api := "https://music.163.com/weapi/login/cellphone"
 	code, bodyBytes := util.CallWeapi(api, data)

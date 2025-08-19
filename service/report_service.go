@@ -18,10 +18,6 @@ type ReportService struct {
 }
 
 func (service *ReportService) Playend() (float64, []byte) {
-	options := &util.Options{
-		Crypto: "weapi",
-	}
-
 	if service.EndType == "" {
 		service.EndType = "playend"
 	}
@@ -30,15 +26,16 @@ func (service *ReportService) Playend() (float64, []byte) {
 	}
 
 	jsonData := map[string]interface{}{
-		"type":     service.Type,
-		"wifi":     0,
-		"download": 0,
-		"id":       service.ID,
-		"time":     service.Time,
-		"end":      service.EndType,
-		"source":   service.SourceType,
-		"mainsite": "1",
-		"content":  "",
+		"type":        service.Type,
+		"wifi":        0,
+		"download":    0,
+		"id":          service.ID,
+		"time":        service.Time,
+		"end":         service.EndType,
+		"source":      service.SourceType,
+		"mainsite":    "1",
+		"mainsiteWeb": "1",
+		"content":     "",
 	}
 
 	if service.SourceId != "" {
@@ -64,25 +61,26 @@ func (service *ReportService) Playend() (float64, []byte) {
 		data["logs"] = string(str)
 	}
 
-	code, reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/feedback/weblog`, data, options)
+	api := "https://clientlogusf.music.163.com/weapi/feedback/weblog"
+	cookiejar := util.GetGlobalCookieJar()
+	csrfToken := util.GetCsrfToken(cookiejar)
+	data["csrf_token"] = csrfToken
+	code, bodyBytes := util.CallWeapi(api+"?csrf_token="+csrfToken, data)
 
-	return code, reBody
+	return code, bodyBytes
 }
 
 func (service *ReportService) Playstart() (float64, []byte) {
-	options := &util.Options{
-		Crypto: "weapi",
-	}
-
 	if service.Type == "" {
 		service.Type = "song"
 	}
 
 	jsonData := map[string]interface{}{
-		"id":       service.ID,
-		"type":     service.Type,
-		"content":  "",
-		"mainsite": "1",
+		"id":          service.ID,
+		"type":        service.Type,
+		"content":     "",
+		"mainsite":    "1",
+		"mainsiteWeb": "1",
 	}
 
 	if _, err := strconv.ParseInt(service.SourceId, 10, 64); err == nil {
@@ -104,8 +102,22 @@ func (service *ReportService) Playstart() (float64, []byte) {
 	if str, err := json.Marshal(logs); err == nil {
 		data["logs"] = string(str)
 	}
+	api := "https://clientlogusf.music.163.com/weapi/feedback/weblog"
+	cookiejar := util.GetGlobalCookieJar()
+	csrfToken := util.GetCsrfToken(cookiejar)
+	data["csrf_token"] = csrfToken
+	code, bodyBytes := util.CallWeapi(api+"?csrf_token="+csrfToken, data)
 
-	code, reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/feedback/weblog`, data, options)
+	return code, bodyBytes
+}
 
-	return code, reBody
+// 获取P2P流量开关状态
+func (service *ReportService) P2PFlowSwitchGet() (float64, []byte) {
+	data := make(map[string]string)
+	cookiejar := util.GetGlobalCookieJar()
+	csrfToken := util.GetCsrfToken(cookiejar)
+	data["csrf_token"] = csrfToken
+	api := "https://music.163.com/weapi/activity/p2p/flow/switch/get"
+	code, bodyBytes := util.CallWeapi(api+"?csrf_token="+csrfToken, data)
+	return code, bodyBytes
 }
