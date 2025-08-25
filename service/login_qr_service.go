@@ -2,6 +2,7 @@ package service
 
 import (
 	"encoding/json"
+	"log"
 
 	"github.com/go-musicfox/netease-music/util"
 )
@@ -11,8 +12,9 @@ type LoginQRService struct {
 }
 
 func (service *LoginQRService) GetKey() (float64, []byte, string) {
-	data := map[string]string{
-		"type": "1",
+	data := map[string]interface{}{
+		"type":         1,
+		"noCheckToken": true,
 	}
 
 	api := "https://music.163.com/weapi/login/qrcode/unikey"
@@ -20,7 +22,10 @@ func (service *LoginQRService) GetKey() (float64, []byte, string) {
 	if code != 200 || len(bodyBytes) == 0 {
 		return code, bodyBytes, ""
 	}
-	_ = json.Unmarshal(bodyBytes, service)
+	err := json.Unmarshal(bodyBytes, service)
+	if err != nil {
+		log.Fatalf("Error unmarshalling bodybytes: %v", err)
+	}
 
 	// 生成 chainId，这个是新版本新加的参数
 	cookieJar := util.GetGlobalCookieJar()
@@ -34,9 +39,10 @@ func (service *LoginQRService) CheckQR() (float64, []byte) {
 	if service.UniKey == "" {
 		return 0, nil
 	}
-	data := map[string]string{
-		"type": "1",
-		"key":  service.UniKey,
+	data := map[string]interface{}{
+		"type":         1,
+		"noCheckToken": true,
+		"key":          service.UniKey,
 	}
 
 	api := "https://music.163.com/weapi/login/qrcode/client/login"

@@ -30,7 +30,7 @@ func (service *ScrobbleService) Scrobble() (float64, []byte) {
 		},
 	}
 
-	var data = make(map[string]string)
+	var data = make(map[string]interface{})
 	if str, err := json.Marshal(logs); err == nil {
 		data["logs"] = string(str)
 	}

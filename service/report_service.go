@@ -56,7 +56,7 @@ func (service *ReportService) Playend() (float64, []byte) {
 		},
 	}
 
-	data := make(map[string]string)
+	data := make(map[string]interface{})
 	if str, err := json.Marshal(logs); err == nil {
 		data["logs"] = string(str)
 	}
@@ -98,7 +98,7 @@ func (service *ReportService) Playstart() (float64, []byte) {
 		},
 	}
 
-	data := make(map[string]string)
+	data := make(map[string]interface{})
 	if str, err := json.Marshal(logs); err == nil {
 		data["logs"] = string(str)
 	}
@@ -108,16 +108,5 @@ func (service *ReportService) Playstart() (float64, []byte) {
 	data["csrf_token"] = csrfToken
 	code, bodyBytes := util.CallWeapi(api+"?csrf_token="+csrfToken, data)
 
-	return code, bodyBytes
-}
-
-// 获取P2P流量开关状态
-func (service *ReportService) P2PFlowSwitchGet() (float64, []byte) {
-	data := make(map[string]string)
-	cookiejar := util.GetGlobalCookieJar()
-	csrfToken := util.GetCsrfToken(cookiejar)
-	data["csrf_token"] = csrfToken
-	api := "https://music.163.com/weapi/activity/p2p/flow/switch/get"
-	code, bodyBytes := util.CallWeapi(api+"?csrf_token="+csrfToken, data)
 	return code, bodyBytes
 }

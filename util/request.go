@@ -348,12 +348,17 @@ func (req *request) SendPost() (Response *http.Response) {
 // 返回：
 // - code: API调用后的状态码
 // - bodyBytes: API返回的内容
-func CallWeapi(api string, data map[string]string) (code float64, bodyBytes []byte) {
+func CallWeapi(api string, data map[string]interface{}) (code float64, bodyBytes []byte) {
 	req := NewRequest(api)
 	// 传入加密后的formdata
-	req.Datas = Weapi(data)
+	// 这里统一使用重写的ApiParamsEncode函数加密，以兼容any类型
+	encodedParams, err := ApiParamsEncode(data)
+	if err != nil{
+		log.Fatalf("Error encoding params: %v", err)
+	}
+	req.Datas = encodedParams
 	resp := req.SendPost()
-	bodyBytes, err := io.ReadAll(resp.Body)
+	bodyBytes, err = io.ReadAll(resp.Body)
 	if err != nil {
 		log.Fatalf("Error reading body: %v", err)
 	}
