@@ -17,7 +17,13 @@ type ReportService struct {
 	EndType    string `json:"endType" form:"endType"` // playend：正常结束；interrupt：第三方APP打断： exception: 错误； ui: 用户切歌
 }
 
-func (service *ReportService) Playend() (float64, []byte) {
+// Playend 上报歌曲播放停止
+//
+// 返回：
+//   - code: 响应状态码
+//   - bodyBytes: 完整的响应体
+//   - err: 错误内容
+func (service *ReportService) Playend() (float64, []byte, error) {
 	if service.EndType == "" {
 		service.EndType = "playend"
 	}
@@ -56,7 +62,7 @@ func (service *ReportService) Playend() (float64, []byte) {
 		},
 	}
 
-	data := make(map[string]string)
+	data := make(map[string]interface{})
 	if str, err := json.Marshal(logs); err == nil {
 		data["logs"] = string(str)
 	}
@@ -65,12 +71,16 @@ func (service *ReportService) Playend() (float64, []byte) {
 	cookiejar := util.GetGlobalCookieJar()
 	csrfToken := util.GetCsrfToken(cookiejar)
 	data["csrf_token"] = csrfToken
-	code, bodyBytes := util.CallWeapi(api+"?csrf_token="+csrfToken, data)
+	code, bodyBytes, err := util.CallWeapi(api+"?csrf_token="+csrfToken, data)
+	if err != nil {
+		return code, bodyBytes, err
+	}
 
-	return code, bodyBytes
+	return code, bodyBytes, nil
 }
 
-func (service *ReportService) Playstart() (float64, []byte) {
+// Playstart 上报歌曲播放开始
+func (service *ReportService) Playstart() (float64, []byte, error) {
 	if service.Type == "" {
 		service.Type = "song"
 	}
@@ -98,7 +108,7 @@ func (service *ReportService) Playstart() (float64, []byte) {
 		},
 	}
 
-	data := make(map[string]string)
+	data := make(map[string]interface{})
 	if str, err := json.Marshal(logs); err == nil {
 		data["logs"] = string(str)
 	}
@@ -106,18 +116,10 @@ func (service *ReportService) Playstart() (float64, []byte) {
 	cookiejar := util.GetGlobalCookieJar()
 	csrfToken := util.GetCsrfToken(cookiejar)
 	data["csrf_token"] = csrfToken
-	code, bodyBytes := util.CallWeapi(api+"?csrf_token="+csrfToken, data)
+	code, bodyBytes, err := util.CallWeapi(api+"?csrf_token="+csrfToken, data)
+	if err != nil {
+		return code, bodyBytes, err
+	}
 
-	return code, bodyBytes
-}
-
-// 获取P2P流量开关状态
-func (service *ReportService) P2PFlowSwitchGet() (float64, []byte) {
-	data := make(map[string]string)
-	cookiejar := util.GetGlobalCookieJar()
-	csrfToken := util.GetCsrfToken(cookiejar)
-	data["csrf_token"] = csrfToken
-	api := "https://music.163.com/weapi/activity/p2p/flow/switch/get"
-	code, bodyBytes := util.CallWeapi(api+"?csrf_token="+csrfToken, data)
-	return code, bodyBytes
+	return code, bodyBytes, nil
 }

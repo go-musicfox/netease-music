@@ -21,7 +21,10 @@ func TestReportService(t *testing.T) {
 		EndType:    "playend",
 	}
 
-	code, bodyBytes := service.Playend()
+	code, bodyBytes, err := service.Playend()
+	if err != nil {
+		t.Fatalf("error: %s", err.Error())
+	}
 	t.Logf("code: %f, body: %s", code, string(bodyBytes))
 	if code != 200 {
 		t.Errorf("code error: %f", code)

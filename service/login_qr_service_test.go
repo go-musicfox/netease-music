@@ -9,7 +9,10 @@ import (
 
 func TestLoginQRService(t *testing.T) {
 	service := &LoginQRService{}
-	code, _, qrcodeUrl := service.GetKey()
+	code, _, qrcodeUrl, err := service.GetKey()
+	if err != nil {
+		t.Errorf("error: %s", err.Error())
+	}
 	t.Log(code, string(qrcodeUrl))
 	if code != 200 {
 		t.Fatalf("code error: %f", code)
@@ -28,7 +31,10 @@ func TestLoginQRService(t *testing.T) {
 
 	// 开始轮询扫码状态
 	for {
-		code, resp := service.CheckQR()
+		code, resp, err := service.CheckQR()
+		if err != nil {
+			t.Fatalf("Failed to check qrcode: %s", err.Error())
+		}
 		switch {
 		case code == 803:
 			t.Logf("扫码成功：%s", string(resp))
