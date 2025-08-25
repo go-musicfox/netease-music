@@ -8,13 +8,11 @@ type LogoutService struct {
 }
 
 func (service *LogoutService) Logout() (float64, []byte) {
-
-	options := &util.Options{
-		Crypto: "weapi",
-		Ua:     "pc",
-	}
-	data := make(map[string]string)
-	code, reBody, _ := util.CreateRequest("POST", `https://music.163.com/weapi/logout`, data, options)
-
-	return code, reBody
+	api := "https://music.163.com/weapi/logout"
+	data := make(map[string]interface{})
+	cookiejar := util.GetGlobalCookieJar()
+	csrfToken := util.GetCsrfToken(cookiejar)
+	data["csrf_token"] = csrfToken
+	code, bodyBytes := util.CallWeapi(api, data)
+	return code, bodyBytes
 }
