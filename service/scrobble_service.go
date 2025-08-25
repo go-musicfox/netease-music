@@ -12,7 +12,7 @@ type ScrobbleService struct {
 	Time     int64  `json:"time" form:"time"`
 }
 
-func (service *ScrobbleService) Scrobble() (float64, []byte) {
+func (service *ScrobbleService) Scrobble() (float64, []byte, error) {
 
 	var logs = []map[string]interface{}{
 		{
@@ -39,7 +39,9 @@ func (service *ScrobbleService) Scrobble() (float64, []byte) {
 	cookiejar := util.GetGlobalCookieJar()
 	csrfToken := util.GetCsrfToken(cookiejar)
 	data["csrf_token"] = csrfToken
-	code, bodyBytes := util.CallWeapi(api+"?csrf_token="+csrfToken, data)
-
-	return code, bodyBytes
+	code, bodyBytes, err := util.CallWeapi(api+"?csrf_token="+csrfToken, data)
+	if err != nil {
+		return code, bodyBytes, err
+	}
+	return code, bodyBytes, nil
 }
