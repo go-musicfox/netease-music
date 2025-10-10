@@ -15,10 +15,10 @@ type LoginQRService struct {
 //
 // 返回：
 //
-//	- code: 状态码
-//  - bodyByte：返回的响应体
-//  - 获取到的Unikey
-//  - error
+//   - code: 状态码
+//   - bodyByte：返回的响应体
+//   - 获取到的Unikey
+//   - error
 func (service *LoginQRService) GetKey() (float64, []byte, string, error) {
 	data := map[string]interface{}{
 		"type":         1,
@@ -26,7 +26,8 @@ func (service *LoginQRService) GetKey() (float64, []byte, string, error) {
 	}
 
 	api := "https://music.163.com/weapi/login/qrcode/unikey"
-	code, bodyBytes, err := util.CallWeapi(api, data)
+	proxy := "http://127.0.0.1:7897"
+	code, bodyBytes, err := util.CallWeapi(api, data, proxy)
 	if err != nil {
 		return code, bodyBytes, "", err
 	}
@@ -57,7 +58,8 @@ func (service *LoginQRService) CheckQR() (float64, []byte, error) {
 	}
 
 	api := "https://music.163.com/weapi/login/qrcode/client/login"
-	code, bodyBytes, err := util.CallWeapi(api, data)
+	proxy := "http://127.0.0.1:7897"
+	code, bodyBytes, err := util.CallWeapi(api, data, proxy)
 	if err != nil {
 		return code, bodyBytes, err
 	}
