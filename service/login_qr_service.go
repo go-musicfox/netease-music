@@ -26,8 +26,7 @@ func (service *LoginQRService) GetKey() (float64, []byte, string, error) {
 	}
 
 	api := "https://music.163.com/weapi/login/qrcode/unikey"
-	proxy := "http://127.0.0.1:7897"
-	code, bodyBytes, err := util.CallWeapi(api, data, proxy)
+	code, bodyBytes, err := util.CallWeapi(api, data)
 	if err != nil {
 		return code, bodyBytes, "", err
 	}
@@ -58,8 +57,7 @@ func (service *LoginQRService) CheckQR() (float64, []byte, error) {
 	}
 
 	api := "https://music.163.com/weapi/login/qrcode/client/login"
-	proxy := "http://127.0.0.1:7897"
-	code, bodyBytes, err := util.CallWeapi(api, data, proxy)
+	code, bodyBytes, err := util.CallWeapi(api, data)
 	if err != nil {
 		return code, bodyBytes, err
 	}
