@@ -66,6 +66,30 @@ func GetCsrfToken(cookieJar http.CookieJar) string {
 	return csrfToken
 }
 
+// ParseCookieString 将 "key=value; key2=value2" 格式的字符串转换为 map
+func ParseCookieString(cookieStr string) map[string]string {
+	result := make(map[string]string)
+	if cookieStr == "" {
+		return result
+	}
+
+	parts := strings.Split(cookieStr, ";")
+
+	for _, part := range parts {
+		part = strings.TrimSpace(part)
+
+		if part == "" {
+			continue
+		}
+		key, value, found := strings.Cut(part, "=")
+
+		if found {
+			result[key] = value
+		}
+	}
+	return result
+}
+
 // 将 cookies 添加到指定的 CookieJar 中
 func AddCookiesToJar(jar http.CookieJar, cookies map[string]string, targetURLStr string) {
 	if jar == nil {
