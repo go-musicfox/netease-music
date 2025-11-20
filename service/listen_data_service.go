@@ -2,6 +2,7 @@ package service
 
 import (
 	"encoding/json"
+	"fmt"
 
 	"github.com/go-musicfox/netease-music/util"
 )
@@ -62,5 +63,34 @@ func (service *ListenDataService) Total() (result ListenDataTotalResult, err err
 	if err != nil {
 		return result, err
 	}
+	return result, nil
+}
+
+// GetReport 获取听歌报告
+// 结构过于复杂，返回类型map处理
+func (service *ListenDataService) GetReport(report_type ...string) (result map[string]interface{}, err error) {
+	currentType := "week"
+	if len(report_type) > 0 && report_type[0] != "" {
+		currentType = report_type[0]
+	}
+	switch currentType {
+	case "week", "month", "year":
+	default:
+		return result, fmt.Errorf("invalid report type: %s. allowed types: week, month, year", currentType)
+	}
+
+	data := map[string]interface{}{}
+	data["type"] = currentType
+	data["endTime"] = ""
+	api := "https://music.163.com/api/content/activity/listen/data/report"
+	_, bytesData, err := util.CallApi(api, data)
+	if err != nil {
+		return result, err
+	}
+	err = json.Unmarshal(bytesData, &result)
+	if err != nil {
+		return result, err
+	}
+
 	return result, nil
 }
