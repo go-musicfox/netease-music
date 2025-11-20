@@ -40,6 +40,6 @@ func TestYunbeiSigninService_Signin(t *testing.T) {
 		t.Errorf("获取信息失败，code: %f", sign.Code)
 	} else {
 		t.Log("云贝信息：")
-		t.Log("\n" + FormatStruct(info))
+		t.Log("\n" + Format(info))
 	}
 }
