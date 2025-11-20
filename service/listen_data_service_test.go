@@ -17,5 +17,13 @@ func TestListenData(t *testing.T) {
 	if result.Code != 200 {
 		t.Logf("发生错误，code：%f", result.Code)
 	}
-	t.Logf("总计听歌时长: %.2f 小时", result.Data.TotalDuration/3600)
+	t.Logf("总计听歌时长: %.2f 秒", result.Data.TotalDuration)
+	report, err := service.GetReport("week")
+	if err != nil {
+		t.Logf("error: %v", err)
+	}
+	if result.Code != 200 {
+		t.Logf("发生错误，code：%f", result.Code)
+	}
+	t.Log("\n" + Format(report))
 }
