@@ -13,7 +13,7 @@ type ListenDataService struct {
 type ListenDataTodaySongsResult struct {
 	Code float64 `json:"code"`
 	Data struct {
-		SongDTOs songDTOs `json:"songDTOs"`
+		SongDTOs []songDTOs `json:"songDTOs"`
 	} `json:"data"`
 	Message string `json:"message"`
 }
