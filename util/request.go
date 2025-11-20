@@ -403,3 +403,42 @@ func CallWeapi(api string, data map[string]interface{}, proxy ...string) (code f
 
 	return code, bodyBytes, nil
 }
+
+// CallApi 调用网易云音乐的移动端API。
+func CallApi(api string, data map[string]interface{}, proxy ...string) (code float64, bodyBytes []byte, err error) {
+	req := NewRequest(api, proxy...)
+	formData := make(map[string]string)
+	for k, v := range data {
+		formData[k] = fmt.Sprintf("%v", v)
+	}
+	req.Datas = formData
+	resp, err := req.SendPost()
+	if err != nil {
+		return 0, nil, fmt.Errorf("failed to send request: %w", err)
+	}
+	defer resp.Body.Close()
+
+	// 读取响应体
+	bodyBytes, err = io.ReadAll(resp.Body)
+	if err != nil {
+		return 0, nil, fmt.Errorf("failed to read response body: %w", err)
+	}
+
+	// 解析并验证响应中的 'code'
+	var respData map[string]interface{}
+	if err := json.Unmarshal(bodyBytes, &respData); err != nil {
+		return 0, bodyBytes, fmt.Errorf("error unmarshaling response JSON: %w", err)
+	}
+
+	codeValue, codeExists := respData["code"]
+	if !codeExists {
+		return 0, bodyBytes, fmt.Errorf("response JSON does not contain 'code' field")
+	}
+
+	code, ok := codeValue.(float64)
+	if !ok {
+		return 0, bodyBytes, fmt.Errorf("'code' field is not a number, got type: %T", codeValue)
+	}
+
+	return code, bodyBytes, nil
+}
