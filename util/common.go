@@ -26,6 +26,16 @@ func RandStringRunes(n int) string {
 	return string(b)
 }
 
+func ApplyRequestStrategy(jar http.CookieJar) {
+	// 注入反风控参数
+	strategyCookies := []*http.Cookie{
+		{Name: "os", Value: "pc"},
+		{Name: "NMTID", Value: "some_random_id_from_strategy"},
+	}
+	targetUrl, _ := url.Parse("https://music.163.com")
+	jar.SetCookies(targetUrl, strategyCookies)
+}
+
 func StringOr(a, b string, others ...string) string {
 	if a != "" {
 		return a
